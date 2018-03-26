@@ -7,6 +7,9 @@ import android.util.Log;
  */
 
 public class LogManager {
+
+    // test 성공 가즈아아아아앙아아ㅏ!!!!
+
     private static final String TAG = "MainActivity";
     private static final boolean DEBUG = true;
     public static void print(String msg) {
