@@ -17,4 +17,13 @@
     <!--ON OFF 글자-->
     <string name="ON">ON</string>
     <string name="OFF">OFF</string>
+
+
+    <!--기기등록 페이지 에 들어갈 말들-->
+    <string name="brand">브랜드 명</string>
+    <string name="categoiry">카테고리 명</string>
+    <string name="device">제품 명</string>
+
+    <!--검색 버튼-->
+    <string name="search">검색</string>
 </resources>

@@ -30,22 +30,28 @@
         <activity android:name=".Activity_package.Smart_Plug"/>
         <activity android:name=".Activity_package.Admit_Activity"/>
 
-        <service android:name=".FCM_package.MyFirebaseInstanceIDService"
+        <service
+            android:name=".FCM_package.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-
         </service>
 
-        <service android:name=".FCM_package.MyFirebaseMessagingService"
+        <service
+            android:name=".FCM_package.MyFirebaseInstanceIDService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="om.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+
+
+
+
 
 
 

@@ -10,17 +10,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 
 /**
- * Created by user on 2018-03-22.
+ * Created by user on 2018-03-26.
  */
 
-public final class ServerUtilities {
-
+public class ServerUtilities {
     private static final int MAX_ATTEMPTS = 5;
     private static final int BACKOFF_MILLI_SECONDS = 2000;
     private static final Random random = new Random();
@@ -135,4 +134,6 @@ public final class ServerUtilities {
             }
         }
     }
+
+
 }

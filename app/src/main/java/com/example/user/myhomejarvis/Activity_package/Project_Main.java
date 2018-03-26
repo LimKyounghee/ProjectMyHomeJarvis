@@ -25,14 +25,23 @@ public class Project_Main extends AppCompatActivity {
 
             switch (v.getId()){
 
-                case R.id.button_change_Led_page:
-                    Light_On_Off light_on_off = new Light_On_Off();
-                    doChangePage(light_on_off);
+                case R.id.button_config_Myhome:
+                    //여기 누르면 우리집 확인하기 페이지로 넘어감
+                    Config_MyHome config_myHome = new Config_MyHome();
+                    doChangePage(config_myHome);
                     break;
 
-                case R.id.button_change_page_smart_pluge:
-                    Smart_Plug smart_plug = new Smart_Plug();
-                    doChangePage(smart_plug);
+                case R.id.button_register_Home:
+                    //여기누르면 집 등록하기 페이지로 넘어감
+                    Add_Home_Activity add_home_activity = new Add_Home_Activity();
+                    doChangePage(add_home_activity);
+                    break;
+
+                case R.id.add_device:
+                    Add_device_Activity add_device_activity = new Add_device_Activity();
+                    doChangePage(add_device_activity);
+                    //여기 누르면 기기등록 페이지로 넘어감
+
                     break;
             }
         }
@@ -68,7 +77,7 @@ public class Project_Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        findViewById(R.id.button_change_Led_page).setOnClickListener(handler);
-        findViewById(R.id.button_change_page_smart_pluge).setOnClickListener(handler);
+        findViewById(R.id.button_config_Myhome).setOnClickListener(handler);
+        findViewById(R.id.button_register_Home).setOnClickListener(handler);
     }
 }
