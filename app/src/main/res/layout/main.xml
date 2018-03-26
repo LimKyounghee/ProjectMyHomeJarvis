@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="58dp">
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="201dp"
+        android:background="@drawable/background2">
+
+    </android.support.constraint.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/button_change_Led_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="전구 페이지로 들어가기" />
+
+            <Button
+                android:id="@+id/button_change_page_smart_pluge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="스마트 플러그로 들어ㅏ기" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="161dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mainlogo" />
+
+    <EditText
+        android:id="@+id/editText_login_ID"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/editbackimg"
+        android:ems="10"
+        android:hint="아이디"
+        android:inputType="textPersonName"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/myhomeFontColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/editText_login_PW"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/editbackimg"
+        android:ems="10"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_login_ID" />
+
+    <Button
+        android:id="@+id/button_login"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/login_button"
+        android:text="@string/myhome_login"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_login_PW" />
+
+    <Button
+        android:id="@+id/button_pw_config"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/text_button"
+        android:text="@string/myhome_login_PW_Config"
+        android:textColor="@color/myhomeFontColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+
+    <Button
+        android:id="@+id/button_id_config"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="72dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/text_button"
+        android:text="@string/myhome_login_ID_Config"
+        android:textColor="@color/myhomeFontColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+
+    <Button
+        android:id="@+id/button_login_to_join"
+
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="63dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/text_button"
+        android:text="@string/myhome_login_Join"
+        android:textColor="@color/myhomeFontColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+</android.support.constraint.ConstraintLayout>

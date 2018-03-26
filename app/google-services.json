@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "910370456202",
+    "firebase_url": "https://projectmyhome-ff5ab.firebaseio.com",
+    "project_id": "projectmyhome-ff5ab",
+    "storage_bucket": "projectmyhome-ff5ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910370456202:android:ed376540f8a76257",
+        "android_client_info": {
+          "package_name": "com.example.user.myhomejarvis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910370456202-vc6g50vc9jc60uh61h9f28ce1k7kf2v4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkk7s3MKFioxzjvRUjjRspmMhNwI6YPCY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

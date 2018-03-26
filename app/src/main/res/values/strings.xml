@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">MyHomeJarvis</string>
+    <string name="default_notification_channel_id">FCMID</string>
+    <!--앱 접근 허용 스트링-->
+    <string name="myhome_admin">확인</string>
+
+    <!--로그인 페이지-->
+    <string name="myhome_login">로그인</string>
+    <string name="myhome_login_ID_Config">아이디 찾기</string>
+    <string name="myhome_login_PW_Config">비밀번호 찾기</string>
+    <string name="myhome_login_Join">회원가입</string>
+
+    <!--로딩 페이지-->
+    <string name="myhome_main_progressar">로딩중입니다.....</string>
+
+    <!--ON OFF 글자-->
+    <string name="ON">ON</string>
+    <string name="OFF">OFF</string>
+</resources>
