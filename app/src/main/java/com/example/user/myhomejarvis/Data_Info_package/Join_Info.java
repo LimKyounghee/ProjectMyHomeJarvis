@@ -6,7 +6,7 @@ package com.example.user.myhomejarvis.Data_Info_package;
 
 public class Join_Info {
 
-    private String id;
+    private String userID;
     private String pw;
     private String name;
     private String birth;
@@ -18,11 +18,11 @@ public class Join_Info {
 
 
     public String getId() {
-        return id;
+        return userID;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.userID = id;
     }
 
     public String getPw() {
@@ -92,7 +92,7 @@ public class Join_Info {
     @Override
     public String toString() {
         return "Join_Info{" +
-                "id='" + id + '\'' +
+                "id='" + userID + '\'' +
                 ", pw='" + pw + '\'' +
                 ", name='" + name + '\'' +
                 ", birth='" + birth + '\'' +

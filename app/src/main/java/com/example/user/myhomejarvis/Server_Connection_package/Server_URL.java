@@ -11,6 +11,7 @@ public class Server_URL {
     private static final String join_URL = "http://192.168.0.8:8080/JavisProject/signin.in";
     private static final String login_URL = "http://192.168.0.8:8080/JavisProject/login.in";
     private static final String led_onoff_URL = "http://192.168.0.8:8080/JavisProject/light.in";
+    private static final String category = "http://192.168.0.8:8080/JavisProject/category.in";
 
     public static String getSmartplug_URL() {
         return smartplug_URL;
@@ -31,4 +32,8 @@ public class Server_URL {
     }
 
     public static String getLed_onoff_URL() {return led_onoff_URL;}
+
+    public static String getCategory() {return category;}
 }
+
+

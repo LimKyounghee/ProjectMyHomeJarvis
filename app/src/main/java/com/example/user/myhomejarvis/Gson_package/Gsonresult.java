@@ -52,4 +52,24 @@ public class Gsonresult {
         return  gsonResponse;
 
     }
+
+    public GsonResponse_add_device getResponse_add_device(String result){
+
+        Gson gson = new Gson();
+        GsonResponse_add_device gsonResponse_add_device = null;
+
+        try {
+
+            gsonResponse_add_device = gson.fromJson(result, GsonResponse_add_device.class);
+
+            Log.d(TAG, "gsonResponse_add_device fromJson 성공함");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return  gsonResponse_add_device;
+    }
 }
+
+

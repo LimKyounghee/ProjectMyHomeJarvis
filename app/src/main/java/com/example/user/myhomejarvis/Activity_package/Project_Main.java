@@ -10,9 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.user.myhomejarvis.Data_Info_package.Request_Info;
 import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
+import com.example.user.myhomejarvis.Gson_package.GsonResponse_add_device;
+import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
 import com.example.user.myhomejarvis.Server_Connection_package.Server_URL;
@@ -55,10 +58,9 @@ public class Project_Main extends AppCompatActivity {
                 case R.id.add_device:
                     Add_device_Activity add_device_activity = new Add_device_Activity();
 //                    String url = null;//url추가하자
-                    url = Server_URL.getJoin_URL();//여기도 바꾸장
-
+                    url = Server_URL.getCategory();//여기도 바꾸장
                     doServerConnect(url,"request","category");
-                    doChangePage(add_device_activity);
+//                    doChangePage(add_device_activity);
                     //여기 누르면 기기등록 페이지로 넘어감
                     //누를때 서버에게 카테고리 정보 받아서 그리드에 넣을수 있게 해야함
 
@@ -111,9 +113,9 @@ public class Project_Main extends AppCompatActivity {
 
         try{
 
-            serverConnection = new ServerConnection(request_info_json,url,type, threadHandler);
+            serverConnection = new ServerConnection(request_info_json,url,type, new ThreadHandler());
             serverConnection.start();
-            Log.d(TAG,"서버와 연결");
+            Log.d(TAG,"서버와 연 결");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -124,7 +126,55 @@ public class Project_Main extends AppCompatActivity {
 
         @Override
         public void handleMessage(Message msg) {
+            Log.d(TAG,"핸들러 연결");
             super.handleMessage(msg);
+
+            if(msg != null){
+
+                Bundle b = msg.getData();
+                String result = b.getString("data");
+                if(("").equals(result)){
+                    Toast.makeText(getApplicationContext(),"서버와 통신 실패", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    Gsonresult gsonresult = new Gsonresult();
+                    Log.d(TAG,"Gsonresult 연결");
+
+                    GsonResponse_add_device gsonResponse_add_device = gsonresult.getResponse_add_device(result);
+                    Log.d(TAG,"GsonResponse_add_device 연결");
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Grid_items",gsonResponse_add_device.getItems());
+                    bundle.putSerializable("Grid_event",gsonResponse_add_device.getEvent());
+
+                    Log.d(TAG,gsonResponse_add_device.toString());
+
+
+                    if(gsonResponse_add_device == null){
+                        Log.d(TAG,"gsonResponse_add_device 널값이다");
+                    }else{
+
+                        String getEvent = gsonResponse_add_device.getEvent();
+
+                        Log.d(TAG,"이벤트 값  1111111"+getEvent );
+
+                        switch (getEvent){
+
+                            case "category":
+                                //여기서 기기 변경 ㅘ면으로 넘어가기
+                                Log.d(TAG,"스위치에 들어옴 널값이다");
+
+                                Intent intent = new Intent(getApplicationContext(),Add_device_Activity.class);
+                                intent.putExtra("Grid_info",bundle);
+                                startActivityForResult(intent,REQUEST_CODE_MENU);
+
+                                Log.d(TAG,"기기변경 페이지러 너민당");
+                                break;
+                        }
+                    }
+
+                }
+            }
         }
     }
 
@@ -139,6 +189,8 @@ public class Project_Main extends AppCompatActivity {
 
         Bundle bundle = getIntent().getBundleExtra("User_Info");
         UserInfoVO vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
+
+        Log.d(TAG,vo.toString());
 
         //FamilyID확인하고 값이 0000이 아니면 집 추가 버튼 보이지 않게 하고  0000이면 집 추가 버튼 보이게 한다.
 

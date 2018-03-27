@@ -29,6 +29,7 @@
         <activity android:name=".Activity_package.Light_On_Off"/>
         <activity android:name=".Activity_package.Smart_Plug"/>
         <activity android:name=".Activity_package.Admit_Activity"/>
+        <activity android:name=".Activity_package.Add_device_Activity"/>
 
         <service
             android:name=".FCM_package.MyFirebaseMessagingService"
