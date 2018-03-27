@@ -17,6 +17,7 @@ import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
 import com.example.user.myhomejarvis.Gson_package.GsonResponse_add_device;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.R;
+import com.example.user.myhomejarvis.RequestCode;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
 import com.example.user.myhomejarvis.Server_Connection_package.Server_URL;
 import com.google.gson.Gson;
@@ -27,8 +28,9 @@ import com.google.gson.Gson;
 
 public class Project_Main extends AppCompatActivity {
 
-    private final static int REQUEST_CODE_MENU = 103;
     private final static String TAG = "Project_Main";
+    Bundle bundle;
+    UserInfoVO vo;
 
     View.OnClickListener handler = new View.OnClickListener() {
         @Override
@@ -46,41 +48,37 @@ public class Project_Main extends AppCompatActivity {
 //                    String url = null;//url추가하자
                     url = Server_URL.getJoin_URL();///이거 바꾸자
                     doServerConnect(url,"request","config_Home");
-                    doChangePage(config_myHome);
+                    doChangePage(config_myHome, RequestCode.CONFIG_MYHOME);
                     break;
 
                 case R.id.button_register_Home:
                     //여기누르면 집 등록하기 페이지로 넘어감
                     Add_Home_Activity add_home_activity = new Add_Home_Activity();
-                    doChangePage(add_home_activity);
+
+                    doChangePage(add_home_activity, RequestCode.ADD_MYHOME);
                     break;
 
                 case R.id.add_device:
-                    Add_device_Activity add_device_activity = new Add_device_Activity();
-//                    String url = null;//url추가하자
-                    url = Server_URL.getCategory();//여기도 바꾸장
-                    doServerConnect(url,"request","category");
-//                    doChangePage(add_device_activity);
-                    //여기 누르면 기기등록 페이지로 넘어감
-                    //누를때 서버에게 카테고리 정보 받아서 그리드에 넣을수 있게 해야함
-
+                    if(!vo.getFamilyID().equals("0000")) {    //가족 ID 를 등록해야 장비 등록가능 하도록
+                        Add_device_Activity add_device_activity = new Add_device_Activity();
+                        //                    String url = null;//url추가하자
+                        url = Server_URL.getCategory();//여기도 바꾸장
+                        doServerConnect(url, "request", "category");
+                        //                    doChangePage(add_device_activity);
+                        //여기 누르면 기기등록 페이지로 넘어감
+                        //누를때 서버에게 카테고리 정보 받아서 그리드에 넣을수 있게 해야함
+                    } else {
+                        Toast.makeText(getApplicationContext(), "가족을 등록해야 장비를 등록할 수 있습니다. \n가족등록을 먼저 하십시오.", Toast.LENGTH_SHORT).show();
+                    }
 
                     break;
             }
         }
     };
 
-    void doChangePage(Object page_Name){
+    void doChangePage(Object page_Name, int reuqestCode){
 
         Log.d(TAG,page_Name.getClass().getName());
-
-        Bundle bundle = getIntent().getBundleExtra("User_Info");
-        Log.d(TAG,"번들로 인텐트 받음");
-       // bundle.getSerializable("UserInfoVO");
-        Log.d(TAG,"번들로  정보 저장");
-
-        UserInfoVO vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
-        Log.d(TAG,"VO객체 저장 됐냐?" +vo.toString() );
 
         bundle.putSerializable("UserInfoVO",vo);
 
@@ -89,13 +87,44 @@ public class Project_Main extends AppCompatActivity {
 
         intent.putExtra("User_Info",bundle);
         // 사용자 정보 전달한다.
-        startActivityForResult(intent,REQUEST_CODE_MENU);
+        startActivityForResult(intent,reuqestCode);
         Log.d(TAG,"전구 페이지로 넘어가냐?");
 
     }
 
     //페이지 넘어갈때 서버와 연동해야 할 것들은 여기를 거친다.
     //기기추가와 현재상태페이지 넘어갈때 해야함
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        switch (requestCode) {
+            case RequestCode.CONFIG_MYHOME:                       // config_home에서 돌아왔을때
+                break;
+            case RequestCode.ADD_MYHOME:                       // add_home에서 돌아왔을때
+                // 변경된 User_info를 다시 저장함
+                bundle = data.getBundleExtra("User_Info");
+                vo = (UserInfoVO) bundle.getSerializable("UserInfoVO");
+
+                if(!vo.getFamilyID().equals("0000")){
+
+                    Button register_home = findViewById(R.id.button_register_Home);
+                    register_home.setVisibility(View.INVISIBLE);
+                    LinearLayout linearLayout = findViewById(R.id.main_button_LinearLayout);
+                    linearLayout.removeView(register_home);
+
+                }else{
+                    findViewById(R.id.button_register_Home).setOnClickListener(handler);
+                }
+
+                break;
+            case RequestCode.ADD_DEVICE:                       // add_device에서 돌아왔을때
+                break;
+        }
+
+    }
 
     void doServerConnect(String url,String jsoinType, String requestInfo ){
 
@@ -166,7 +195,7 @@ public class Project_Main extends AppCompatActivity {
 
                                 Intent intent = new Intent(getApplicationContext(),Add_device_Activity.class);
                                 intent.putExtra("Grid_info",bundle);
-                                startActivityForResult(intent,REQUEST_CODE_MENU);
+                                startActivityForResult(intent,RequestCode.ADD_DEVICE);
 
                                 Log.d(TAG,"기기변경 페이지러 너민당");
                                 break;
@@ -187,8 +216,8 @@ public class Project_Main extends AppCompatActivity {
         findViewById(R.id.button_config_Myhome).setOnClickListener(handler);
         findViewById(R.id.add_device).setOnClickListener(handler);
 
-        Bundle bundle = getIntent().getBundleExtra("User_Info");
-        UserInfoVO vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
+        bundle = getIntent().getBundleExtra("User_Info");
+        vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
 
         Log.d(TAG,vo.toString());
 
