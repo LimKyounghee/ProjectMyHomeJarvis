@@ -22,36 +22,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/text_back"
-                android:text="@string/brand"
+                android:text="@string/categoiry"
                 android:textColor="@color/myhomeFontColor"
                 android:textSize="16sp" />
 
             <GridView
-                android:id="@+id/grid_brand"
+                android:id="@+id/grid_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:numColumns="3"
-                android:horizontalSpacing="8dp"
-                android:verticalSpacing="8dp"
                 android:layout_margin="8dp"
-                />
+                android:horizontalSpacing="8dp"
+                android:numColumns="3"
+                android:verticalSpacing="8dp" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/text_back"
-                android:text="@string/categoiry"
+                android:text="@string/brand"
                 android:textColor="@color/myhomeFontColor" />
 
             <GridView
-                android:id="@+id/grid_category"
+                android:id="@+id/grid_brand"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:numColumns="3"
+                android:layout_margin="8dp"
                 android:horizontalSpacing="8dp"
-                android:verticalSpacing="8dp"
-                android:layout_margin="8dp"/>
+                android:numColumns="3"
+                android:verticalSpacing="8dp" />
 
             <TextView
                 android:id="@+id/textView9"

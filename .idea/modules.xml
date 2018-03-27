@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GIT.iml" filepath="$PROJECT_DIR$/GIT.iml" />
+      <module fileurl="file://C:\Users\user\Desktop\KPC\Android\MyHomeJarvis\GIT.iml" filepath="C:\Users\user\Desktop\KPC\Android\MyHomeJarvis\GIT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyHomeJarvis.iml" filepath="$PROJECT_DIR$/MyHomeJarvis.iml" />
       <module fileurl="file://C:\Users\Kyun\Desktop\GIT\MyHomeJarvis.iml" filepath="C:\Users\Kyun\Desktop\GIT\MyHomeJarvis.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\Kyun\Desktop\GIT\app\app.iml" filepath="C:\Users\Kyun\Desktop\GIT\app\app.iml" />

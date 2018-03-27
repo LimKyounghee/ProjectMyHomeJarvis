@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:background="@drawable/strok_all"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:padding="10dp">
 
     <ImageView
         android:id="@+id/grid_imageview"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/mainlogo" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/mainlogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/grid_textview"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="쓸 이름"
         android:textColor="@color/myhomeFontColor"
-        android:textSize="15dp"/>
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grid_imageview" />
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

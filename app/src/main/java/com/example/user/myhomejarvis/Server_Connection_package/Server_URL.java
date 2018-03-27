@@ -6,11 +6,11 @@ package com.example.user.myhomejarvis.Server_Connection_package;
 
 public class Server_URL {
 
-    private static final String smartplug_URL = "http://192.168.0.8:8080/JavisProject/plug.do";
-    private static final String led_URL = "http://192.168.0.8:8080/JavisProject/light.do";
-    private static final String join_URL = "http://192.168.0.8:8080/JavisProject/signin.do";
-    private static final String login_URL = "http://192.168.0.8:8080/JavisProject/login.do";
-    private static final String led_onoff_URL = "http://192.168.0.8:8080/JavisProject/light.do";
+    private static final String smartplug_URL = "http://192.168.0.8:8080/JavisProject/plug.in";
+    private static final String led_URL = "http://192.168.0.8:8080/JavisProject/light.in";
+    private static final String join_URL = "http://192.168.0.8:8080/JavisProject/signin.in";
+    private static final String login_URL = "http://192.168.0.8:8080/JavisProject/login.in";
+    private static final String led_onoff_URL = "http://192.168.0.8:8080/JavisProject/light.in";
 
     public static String getSmartplug_URL() {
         return smartplug_URL;
