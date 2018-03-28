@@ -12,7 +12,7 @@ public class Join_Info {
     private String birth;
     private String phone;
     private String email;
-    private String fcmid;
+    private String fcmID;
     private String address;
     private int gender;
 
@@ -82,11 +82,11 @@ public class Join_Info {
     }
 
     public String getFcmid() {
-        return fcmid;
+        return fcmID;
     }
 
     public void setFcmid(String fcmid) {
-        this.fcmid = fcmid;
+        this.fcmID = fcmid;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class Join_Info {
                 ", birth='" + birth + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", fcmid='" + fcmid + '\'' +
+                ", fcmid='" + fcmID+ '\'' +
                 ", address='" + address + '\'' +
                 ", gender=" + gender +
                 '}';

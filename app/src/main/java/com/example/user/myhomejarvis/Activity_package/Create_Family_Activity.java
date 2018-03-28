@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import com.example.user.myhomejarvis.R;
 
-class Create_Family_Activity extends AppCompatActivity {
+public class Create_Family_Activity extends AppCompatActivity {
     Bundle bundle;
 
     @Override

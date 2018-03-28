@@ -218,47 +218,51 @@ public class Login_Activity extends AppCompatActivity {
                     gsonResponse = gsonresult.getStatus_login(result);
 
                     UserInfoVO vo = gsonResponse.getVo();
-                    //인텐트 객체로 보낸당 일단 성공!
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("UserInfoVO",vo);
-                    //근데 USERINFOVO를 SErializable해서 그냥 넣어도 에러는 안뜨는거 같다 ㅎ
+
+                    if( vo != null) {
+                        //인텐트 객체로 보낸당 일단 성공!
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("UserInfoVO", vo);
+                        //근데 USERINFOVO를 SErializable해서 그냥 넣어도 에러는 안뜨는거 같다 ㅎ
 
 
-                    Log.d(TAG,"vo 객체 저장"+vo.toString());
+                        Log.d(TAG, "vo 객체 저장" + vo.toString());
 
 
+                        if (gsonResponse == null) {
+                            Log.d(TAG, "gsonResponse null");
+                        } else {
 
-                    if(gsonResponse == null){
-                        Log.d(TAG,"gsonResponse null");
-                    }else{
-
-                        String getEvent = gsonResponse.getEvent();
-                        String getStatus = gsonResponse.getStatus();
+                            String getEvent = gsonResponse.getEvent();
+                            String getStatus = gsonResponse.getStatus();
 //                        List<User_Info> getVo = gsonResponse.getVo();
 
-                        if(getEvent.equals("Log In")){
+                            if (getEvent.equals("Log In")) {
 
-                            if(getStatus.equals("ok")){
-                                //메인 화면으로 넘어가기
-                                Intent intent = new Intent(getApplicationContext(),Project_Main.class);
-                                intent.putExtra("User_Info",bundle);
-                                //이거 받을때 쓰는 코드
+                                if (getStatus.equals("ok")) {
+                                    //메인 화면으로 넘어가기
+                                    Intent intent = new Intent(getApplicationContext(), Project_Main.class);
+                                    intent.putExtra("User_Info", bundle);
+                                    //이거 받을때 쓰는 코드
 
-                                //Bundle bundle = getIntent().getExtras();
+                                    //Bundle bundle = getIntent().getExtras();
 //                                bundle.getSerializable("UserInfoVO");
 
-                                startActivityForResult(intent,REQUEST_CODE_MENUE);
+                                    startActivityForResult(intent, REQUEST_CODE_MENUE);
 
-                                Log.d(TAG, "메인으로 넘어감");
-                                //로그인 정보도 넘겨주기
-                                //여기에다가 넘겨준다
+                                    Log.d(TAG, "메인으로 넘어감");
+                                    //로그인 정보도 넘겨주기
+                                    //여기에다가 넘겨준다
 
 
-                            }else{
-                                showMessage("Login_false");
+                                } else {
+                                    showMessage("Login_false");
+                                }
                             }
-                        }
 
+                        }
+                    }else {
+                        Toast.makeText(getApplicationContext(), "서버와 연결이 끊겼습니다. 잠시후에 시도해 주십시오.", Toast.LENGTH_LONG).show();
                     }
 
                 }

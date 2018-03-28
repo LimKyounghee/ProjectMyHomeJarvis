@@ -32,6 +32,7 @@ public class Project_Main extends AppCompatActivity {
     Bundle bundle;
     UserInfoVO vo;
 
+
     View.OnClickListener handler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -59,7 +60,7 @@ public class Project_Main extends AppCompatActivity {
                     break;
 
                 case R.id.add_device:
-                    if(!vo.getFamilyID().equals("0000")) {    //가족 ID 를 등록해야 장비 등록가능 하도록
+                    if(vo.getFamilyID() != 0) {    //가족 ID 를 등록해야 장비 등록가능 하도록
                         Add_device_Activity add_device_activity = new Add_device_Activity();
                         //                    String url = null;//url추가하자
                         url = Server_URL.getCategory();//여기도 바꾸장
@@ -80,7 +81,7 @@ public class Project_Main extends AppCompatActivity {
 
         Log.d(TAG,page_Name.getClass().getName());
 
-        bundle.putSerializable("UserInfoVO",vo);
+//        bundle.putSerializable("UserInfoVO",vo);
 
         Intent intent = new Intent(getApplicationContext(),page_Name.getClass());
         Log.d(TAG,"인텐트로 넘어갈려함");
@@ -108,7 +109,7 @@ public class Project_Main extends AppCompatActivity {
                 bundle = data.getBundleExtra("User_Info");
                 vo = (UserInfoVO) bundle.getSerializable("UserInfoVO");
 
-                if(!vo.getFamilyID().equals("0000")){
+                if(vo.getFamilyID() != 0){
 
                     Button register_home = findViewById(R.id.button_register_Home);
                     register_home.setVisibility(View.INVISIBLE);
@@ -213,8 +214,11 @@ public class Project_Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        LinearLayout linearLayout = findViewById(R.id.main_button_LinearLayout);
         findViewById(R.id.button_config_Myhome).setOnClickListener(handler);
         findViewById(R.id.add_device).setOnClickListener(handler);
+        Button register_home = findViewById(R.id.button_register_Home);
+        register_home.setOnClickListener(handler);
 
         bundle = getIntent().getBundleExtra("User_Info");
         vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
@@ -223,15 +227,15 @@ public class Project_Main extends AppCompatActivity {
 
         //FamilyID확인하고 값이 0000이 아니면 집 추가 버튼 보이지 않게 하고  0000이면 집 추가 버튼 보이게 한다.
 
-        if(!vo.getFamilyID().equals("0000")){
+        if(vo.getFamilyID()!=0){
 
-            Button register_home = findViewById(R.id.button_register_Home);
             register_home.setVisibility(View.INVISIBLE);
-            LinearLayout linearLayout = findViewById(R.id.main_button_LinearLayout);
             linearLayout.removeView(register_home);
-
         }else{
-            findViewById(R.id.button_register_Home).setOnClickListener(handler);
+//            findViewById(R.id.button_register_Home).setOnClickListener(handler);
         }
+    }
+    void setUI(){
+
     }
 }

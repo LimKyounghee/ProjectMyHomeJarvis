@@ -36,7 +36,6 @@ public class Gsonresult {
     public GsonResponse_Login getStatus_login(String result){
         Gson gson = new Gson();
         GsonResponse_Login gsonResponse = null;
-        UserInfoVO vo = null;
 
         try {
             gsonResponse =  gson.fromJson(result,GsonResponse_Login.class);
@@ -69,6 +68,24 @@ public class Gsonresult {
         }
 
         return  gsonResponse_add_device;
+    }
+
+    public GsonResponse_add_family getResponse_add_family(String result){
+
+        Gson gson = new Gson();
+        GsonResponse_add_family gsonResponse_add_family = null;
+
+        try {
+
+            gsonResponse_add_family = gson.fromJson(result, GsonResponse_add_family.class);
+
+            Log.d(TAG, "gsonResponse_add_family fromJson 성공함");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return  gsonResponse_add_family;
     }
 }
 

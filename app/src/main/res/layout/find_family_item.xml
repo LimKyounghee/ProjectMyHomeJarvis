@@ -3,16 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:layout_width="300dp"
     android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/find_family_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_centerInParent="true"
             app:srcCompat="@android:drawable/ic_menu_myplaces" />
     </RelativeLayout>
@@ -21,14 +22,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
+            android:id="@+id/find_family_name_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:text="가족 이름"
-            android:layout_marginRight="10dp"
-            android:id="@+id/find_family_name_view"
-            android:layout_centerInParent="true"
-            android:textSize="25dp"
-            android:textColor="@color/myhomeFontColor"/>
+            android:textColor="@color/myhomeFontColor"
+            android:textSize="25dp" />
     </RelativeLayout>
 </LinearLayout>

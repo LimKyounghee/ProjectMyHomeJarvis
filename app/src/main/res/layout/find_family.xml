@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/find_family_edit"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:background="@drawable/id_pw_text"
@@ -46,28 +46,27 @@
         android:layout_height="wrap_content"
         android:text="검    색"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText" />
+        app:layout_constraintTop_toTopOf="@+id/find_family_edit" />
 
     <ListView
         android:id="@+id/find_family_listView"
         android:layout_width="wrap_content"
-        android:layout_height="213dp"
+        android:layout_height="100dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        android:foregroundGravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/find_family_edit" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:text="먼저 가족을 만드신 구성원의 전화번호를 입럭해주세요."
         android:textColor="@android:color/background_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/find_family_listView" />
