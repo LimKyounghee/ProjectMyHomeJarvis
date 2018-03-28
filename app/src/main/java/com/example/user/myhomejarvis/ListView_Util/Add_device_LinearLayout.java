@@ -42,19 +42,15 @@ public class Add_device_LinearLayout  extends LinearLayout{
 
     }
 
-    public TextView getTextView() {
-        return textView;
+
+
+    public void setContent(String content) {
+        textView.setText(content);
     }
 
-    public void setTextView(TextView textView) {
-        this.textView = textView;
-    }
 
-    public ImageView getImageView() {
-        return imageView;
-    }
+    public void setImage(int imageId) {
 
-    public void setImageView(ImageView imageView) {
-        this.imageView = imageView;
+        imageView.setImageResource(imageId);
     }
 }

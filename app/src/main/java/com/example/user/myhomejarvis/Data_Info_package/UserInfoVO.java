@@ -18,7 +18,7 @@ public class UserInfoVO implements Serializable{
     private String email;
     private String phone;
     private String fcmID;
-    private String familyID;
+    private int familyID;
     private String joinDate;
 
     public UserInfoVO(){
@@ -38,7 +38,7 @@ public class UserInfoVO implements Serializable{
     }
 
     public UserInfoVO(int userNo, String userID, String pw, String name, String birth, int gender, String address,
-                      String email, String phone, String fcmID, String joinDate,String familyID) {
+                      String email, String phone, String fcmID, String joinDate,int familyID) {
         this.userNo = userNo;
         this.userID = userID;
         this.pw = pw;
@@ -61,11 +61,11 @@ public class UserInfoVO implements Serializable{
         this.fcmID = fcmID;
     }
 
-    public String getFamilyID() {
+    public int getFamilyID() {
         return familyID;
     }
 
-    public void setFamilyID(String familyID) {
+    public void setFamilyID(int familyID) {
         this.familyID = familyID;
     }
 

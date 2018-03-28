@@ -16,10 +16,13 @@ import com.example.user.myhomejarvis.Data_Info_package.Request_Info;
 import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
 import com.example.user.myhomejarvis.Gson_package.GsonResponse_add_device;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
+import com.example.user.myhomejarvis.ListView_Util.Single_Grid_item_VO;
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
 import com.example.user.myhomejarvis.Server_Connection_package.Server_URL;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 /**
  * Created by user on 2018-03-21.
@@ -143,8 +146,19 @@ public class Project_Main extends AppCompatActivity {
                     GsonResponse_add_device gsonResponse_add_device = gsonresult.getResponse_add_device(result);
                     Log.d(TAG,"GsonResponse_add_device 연결");
 
+
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("Grid_items",gsonResponse_add_device.getItems());
+
+
+                    bundle.putSerializable("Grid_items",gsonResponse_add_device);
+                    ArrayList<Single_Grid_item_VO> single_grid_item_vos = new ArrayList<Single_Grid_item_VO>();
+                    for(String s : gsonResponse_add_device.getItems()){
+
+                        single_grid_item_vos.add(new Single_Grid_item_VO(s));
+
+                    }
+                    bundle.putSerializable("Grid_items",single_grid_item_vos);
+//                    bundle.putSerializable("Grid_items",gsonResponse_add_device.getItems());
                     bundle.putSerializable("Grid_event",gsonResponse_add_device.getEvent());
 
                     Log.d(TAG,gsonResponse_add_device.toString());
@@ -194,7 +208,7 @@ public class Project_Main extends AppCompatActivity {
 
         //FamilyID확인하고 값이 0000이 아니면 집 추가 버튼 보이지 않게 하고  0000이면 집 추가 버튼 보이게 한다.
 
-        if(!vo.getFamilyID().equals("0000")){
+        if(vo.getFamilyID() != 0){
 
             Button register_home = findViewById(R.id.button_register_Home);
             register_home.setVisibility(View.INVISIBLE);

@@ -1,12 +1,13 @@
 package com.example.user.myhomejarvis.Gson_package;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by user on 2018-03-27.
  */
 
-public class GsonResponse_add_device {
+public class GsonResponse_add_device implements Serializable {
 
     String event;
     ArrayList<String> items;

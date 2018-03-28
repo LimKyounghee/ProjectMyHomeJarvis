@@ -29,7 +29,7 @@
             <GridView
                 android:id="@+id/grid_category"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="339dp"
                 android:layout_margin="8dp"
                 android:horizontalSpacing="8dp"
                 android:numColumns="3"
@@ -46,7 +46,7 @@
             <GridView
                 android:id="@+id/grid_brand"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="234dp"
                 android:layout_margin="8dp"
                 android:horizontalSpacing="8dp"
                 android:numColumns="3"
@@ -61,13 +61,13 @@
                 android:textColor="@color/myhomeFontColor" />
 
             <GridView
-                android:id="@+id/device"
+                android:id="@+id/grid_device"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:numColumns="3"
+                android:layout_height="240dp"
+                android:layout_margin="8dp"
                 android:horizontalSpacing="8dp"
-                android:verticalSpacing="8dp"
-                android:layout_margin="8dp"/>
+                android:numColumns="3"
+                android:verticalSpacing="8dp" />
         </LinearLayout>
 
     </ScrollView>
