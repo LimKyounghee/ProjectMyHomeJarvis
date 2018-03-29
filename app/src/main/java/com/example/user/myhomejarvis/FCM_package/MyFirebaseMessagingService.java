@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.user.myhomejarvis.Activity_package.Login_Activity;
+import com.example.user.myhomejarvis.Activity_package.Regist_Family_Request_Activity;
 import com.example.user.myhomejarvis.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -22,7 +23,7 @@ import com.google.firebase.messaging.RemoteMessage;
  */
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-
+    Intent intent;
     private static final String TAG = "MainActivity";
 
     /**
@@ -47,9 +48,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
-        sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("content"));
+        sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("content"), remoteMessage.getData().get("key1"), remoteMessage.getData().get("key2"), remoteMessage.getData().get("key3"));
 
-//      ?덈뱶濡쒖씠???곌묠?곌린
+//      안드로이드 폰깨우기
         PowerManager.WakeLock sCpuWakeLock;
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
@@ -60,29 +61,41 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         sCpuWakeLock.acquire();
     }
 
-    private void sendNotification(String title, String messageBody) {
-        Intent intent = new Intent(this, Login_Activity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+    private void sendNotification(String title, String messageBody, String key1, String key2, String key3) {
 
-        String channelId = getString(R.string.default_notification_channel_id);
-        Uri notificationSoundURI = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder mNotificationBuilder = new NotificationCompat.Builder( this, channelId)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle( title )
-                .setContentText(messageBody)
-                .setAutoCancel( true )
-                .setSound(notificationSoundURI)
-                .setContentIntent(pendingIntent);
+        if ("AddFamilyRequest".equals(key1)) {
+            intent = new Intent(this, Regist_Family_Request_Activity.class);
+            intent.putExtra("message", title);
+            intent.putExtra("userID", key2);
+            intent.putExtra("familyID", key3);
+        } else if ("AddFamilyResult".equals(key1)) {
+            intent = new Intent(this, Login_Activity.class);
+        }
+
+        if (intent != null) {
+            intent.putExtra("title", title);
+            intent.putExtra("contents", messageBody);
+            intent.putExtra("key", key1);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                    PendingIntent.FLAG_ONE_SHOT);
+
+            String channelId = getString(R.string.default_notification_channel_id);
+            Uri notificationSoundURI = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            NotificationCompat.Builder mNotificationBuilder = new NotificationCompat.Builder(this, channelId)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle(title)
+                    .setContentText(messageBody)
+                    .setAutoCancel(true)
+                    .setSound(notificationSoundURI)
+                    .setContentIntent(pendingIntent);
 
 
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(0 /* ID of notification */, mNotificationBuilder.build());
+            notificationManager.notify(0 /* ID of notification */, mNotificationBuilder.build());
+        }
     }
-
 
 }

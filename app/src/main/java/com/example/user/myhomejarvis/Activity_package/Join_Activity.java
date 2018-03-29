@@ -2,6 +2,7 @@ package com.example.user.myhomejarvis.Activity_package;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -379,6 +380,7 @@ public class Join_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.myhome_join);
 
         //비밀번호 확인 클릭시 테두리 색 비밀번호에 맞춰서 알려주기

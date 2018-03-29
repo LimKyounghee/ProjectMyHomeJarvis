@@ -26,7 +26,7 @@ public class Add_Home_Activity extends AppCompatActivity {
                     intent = new Intent(getApplicationContext(), Find_Family_Activity.class);
                     intent.putExtra("User_Info", bundle);
 
-                    startActivityForResult(intent, RequestCode.FIND_FAMILY);
+                    startActivity(intent);
                     break;
                 case R.id.create_family_btn:
                     intent = new Intent(getApplicationContext(), Create_Family_Activity.class);
@@ -44,19 +44,23 @@ public class Add_Home_Activity extends AppCompatActivity {
 
         Intent intent = null;
         switch (requestCode) {
-            case RequestCode.FIND_FAMILY :
-                bundle = data.getBundleExtra("User_Info");
-                intent = new Intent();
-                intent.putExtra("User_Info", bundle);
-                setResult(RESULT_OK, intent);
-                finish();
-                break;
+//            case RequestCode.FIND_FAMILY :
+//                bundle = data.getBundleExtra("User_Info");
+//                intent = new Intent();
+//                intent.putExtra("User_Info", bundle);
+//                setResult(RESULT_OK, intent);
+//                finish();
+//                break;
             case RequestCode.CREATE_FAMILY :
-                bundle = data.getBundleExtra("User_Info");
-                intent = new Intent();
-                intent.putExtra("User_Info", bundle);
-                setResult(RESULT_OK, intent);
-                finish();
+                if (data != null) {
+                    bundle = data.getBundleExtra("User_Info");
+                    intent = new Intent(getApplicationContext(), Project_Main.class);
+                    intent.putExtra("User_Info", bundle);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    // 강제로 뒤로가기 버튼 눌렀을때
+                }
                 break;
         }
     }
