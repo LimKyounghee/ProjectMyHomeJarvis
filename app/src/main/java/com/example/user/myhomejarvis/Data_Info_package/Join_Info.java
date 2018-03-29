@@ -99,6 +99,7 @@ public class Join_Info {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", fcmid='" + fcmID + '\'' +
+                ", fcmid='" + fcmID+ '\'' +
                 ", address='" + address + '\'' +
                 ", gender=" + gender +
                 '}';

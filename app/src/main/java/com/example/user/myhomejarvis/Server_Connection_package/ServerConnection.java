@@ -31,13 +31,7 @@ public class ServerConnection extends  Thread{
 
     }
 
-    //쓰레드 핸들러가 없어도 ㅗ디는경우
-    public ServerConnection(String data, String url, String type){
-        this.data = data;
-        this.url = url;
-        this.type = type;
 
-    }
     public void run(){
 
 
@@ -49,15 +43,7 @@ public class ServerConnection extends  Thread{
         b.putString("data", result);
         threadHandler.sendMessage(message);
         Log.d(TAG,"쓰레드 핸들러 들어감 " + result);
-        //위의 값에서
-        //여기 2018.03.27 10:52분에 바꿈
-//        if(threadHandler != null) {
-//            Log.d(TAG,"쓰레드 핸들러 null값 아닐때 실행한당 " + result);
-//            Message message = new Message();
-//            Bundle b = message.getData();
-//            b.putString("data", result);
-//            threadHandler.sendMessage(message);
-//        }
+
 
     }
 

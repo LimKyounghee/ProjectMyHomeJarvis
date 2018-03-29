@@ -1,5 +1,6 @@
 package com.example.user.myhomejarvis.Activity_package;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import com.example.user.myhomejarvis.Permission_package.PermissionUtil;
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.LogManager;
 
@@ -90,8 +92,19 @@ public class Loading_Activity extends AppCompatActivity {
                 publishProgress(num);
                 SystemClock.sleep(100);
             }
-            Intent intent = new Intent(getApplicationContext(), Admit_Activity.class);
-            startActivity(intent);
+            // 권한이 있으면 바로 로그인 화면으로  없으면 권한 부여화면으로 이동
+            if(PermissionUtil.checkPermissions(Loading_Activity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    && (PermissionUtil.checkPermissions(Loading_Activity.this, Manifest.permission.READ_EXTERNAL_STORAGE))
+                    && (PermissionUtil.checkPermissions(Loading_Activity.this, Manifest.permission.ACCESS_FINE_LOCATION))
+                    && (PermissionUtil.checkPermissions(Loading_Activity.this, Manifest.permission.ACCESS_COARSE_LOCATION))) {
+                // 권한이 있으므로 원하는 메소드를 사용
+                LogManager.print("바로 로그인 화면으로 이동");
+                Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
+                startActivity(intent);
+            }else {
+                Intent intent = new Intent(getApplicationContext(), Admit_Activity.class);
+                startActivity(intent);
+            }
             return "succes";
         }
     }

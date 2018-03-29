@@ -1,6 +1,10 @@
 package com.example.user.myhomejarvis.Activity_package;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +22,7 @@ import com.example.user.myhomejarvis.Gson_package.GsonResponse_add_device;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.ListView_Util.Single_Grid_item_VO;
 import com.example.user.myhomejarvis.R;
+import com.example.user.myhomejarvis.RequestCode;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
 import com.example.user.myhomejarvis.Server_Connection_package.Server_URL;
 import com.google.gson.Gson;
@@ -30,8 +35,78 @@ import java.util.ArrayList;
 
 public class Project_Main extends AppCompatActivity {
 
-    private final static int REQUEST_CODE_MENU = 103;
     private final static String TAG = "Project_Main";
+    Bundle bundle;
+    UserInfoVO vo;
+
+    int userID;//이름은 유저아이딩 인데 패밀리 아이디 저장함... ㅐ밀리 아이디 써야 할지도 몰라서 ㅠ
+
+    double myLocation_longitude;
+    double myLocation_Latitude;
+
+// 위치정보 받기 시작?//////////////////////////////////
+
+   private void startLocationService(){
+
+       LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+       GPSListener gpsListener = new GPSListener();
+       long minTime = 10000;
+       float minDistance = 0;
+
+       try {
+
+           manager.requestLocationUpdates(
+                   LocationManager.GPS_PROVIDER,
+                   minTime,
+                   minDistance,
+                   gpsListener);
+
+
+           manager.requestLocationUpdates(
+                   LocationManager.NETWORK_PROVIDER,
+                   minTime,
+                   minDistance,
+                   gpsListener);
+
+
+           Location lastLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+           if (lastLocation != null) {
+               myLocation_Latitude = lastLocation.getLatitude();
+               myLocation_longitude = lastLocation.getLongitude();
+
+              Log.d(TAG, "Last Known Location : " + "Latitude : " + myLocation_Latitude + "\nLongitude:" + myLocation_longitude);
+           }
+       } catch(SecurityException ex) {
+           ex.printStackTrace();
+       }
+
+       Log.d(TAG,"위치저보 완ㄹ");
+
+   }
+
+   private class GPSListener implements LocationListener{
+
+       public void onLocationChanged(Location location) {
+           myLocation_Latitude = location.getLatitude();
+           myLocation_longitude = location.getLongitude();
+
+           String msg = "Latitude : "+ myLocation_Latitude + "\nLongitude:"+ myLocation_longitude;
+           Log.d(TAG, msg);
+
+       }
+
+       public void onProviderDisabled(String provider) {
+       }
+
+       public void onProviderEnabled(String provider) {
+       }
+
+       public void onStatusChanged(String provider, int status, Bundle extras) {
+       }
+
+
+   }
 
     View.OnClickListener handler = new View.OnClickListener() {
         @Override
@@ -46,59 +121,85 @@ public class Project_Main extends AppCompatActivity {
                 case R.id.button_config_Myhome:
                     //여기 누르면 우리집 확인하기 페이지로 넘어감
                     Config_MyHome config_myHome = new Config_MyHome();
-//                    String url = null;//url추가하자
-                    url = Server_URL.getJoin_URL();///이거 바꾸자
-                    doServerConnect(url,"request","config_Home");
-                    doChangePage(config_myHome);
+                    doChangePage(config_myHome, RequestCode.CONFIG_MYHOME);
                     break;
 
                 case R.id.button_register_Home:
                     //여기누르면 집 등록하기 페이지로 넘어감
                     Add_Home_Activity add_home_activity = new Add_Home_Activity();
-                    doChangePage(add_home_activity);
+
+                    doChangePage(add_home_activity, RequestCode.ADD_MYHOME);
                     break;
 
                 case R.id.add_device:
-                    Add_device_Activity add_device_activity = new Add_device_Activity();
-//                    String url = null;//url추가하자
-                    url = Server_URL.getCategory();//여기도 바꾸장
-                    doServerConnect(url,"request","category");
-//                    doChangePage(add_device_activity);
-                    //여기 누르면 기기등록 페이지로 넘어감
-                    //누를때 서버에게 카테고리 정보 받아서 그리드에 넣을수 있게 해야함
-
+                    if(vo.getFamilyID() != 0) {    //가족 ID 를 등록해야 장비 등록가능 하도록
+                        Add_device_Activity add_device_activity = new Add_device_Activity();
+                        //                    String url = null;//url추가하자
+                        url = Server_URL.getCategory();//여기도 바꾸장
+                        doServerConnect(url, "request", "category");
+                        //                    doChangePage(add_device_activity);
+                        //여기 누르면 기기등록 페이지로 넘어감
+                        //누를때 서버에게 카테고리 정보 받아서 그리드에 넣을수 있게 해야함
+                    } else {
+                        Toast.makeText(getApplicationContext(), "가족을 등록해야 장비를 등록할 수 있습니다. \n가족등록을 먼저 하십시오.", Toast.LENGTH_SHORT).show();
+                    }
 
                     break;
             }
         }
     };
 
-    void doChangePage(Object page_Name){
+    void doChangePage(Object page_Name, int reuqestCode){
 
         Log.d(TAG,page_Name.getClass().getName());
 
-        Bundle bundle = getIntent().getBundleExtra("User_Info");
-        Log.d(TAG,"번들로 인텐트 받음");
-       // bundle.getSerializable("UserInfoVO");
-        Log.d(TAG,"번들로  정보 저장");
-
-        UserInfoVO vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
-        Log.d(TAG,"VO객체 저장 됐냐?" +vo.toString() );
-
-        bundle.putSerializable("UserInfoVO",vo);
+//        bundle.putSerializable("UserInfoVO",vo);
 
         Intent intent = new Intent(getApplicationContext(),page_Name.getClass());
         Log.d(TAG,"인텐트로 넘어갈려함");
 
         intent.putExtra("User_Info",bundle);
+
+
         // 사용자 정보 전달한다.
-        startActivityForResult(intent,REQUEST_CODE_MENU);
+        startActivityForResult(intent,reuqestCode);
         Log.d(TAG,"전구 페이지로 넘어가냐?");
 
     }
 
     //페이지 넘어갈때 서버와 연동해야 할 것들은 여기를 거친다.
     //기기추가와 현재상태페이지 넘어갈때 해야함
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        switch (requestCode) {
+            case RequestCode.CONFIG_MYHOME:                       // config_home에서 돌아왔을때
+                break;
+            case RequestCode.ADD_MYHOME:                       // add_home에서 돌아왔을때
+                // 변경된 User_info를 다시 저장함
+                bundle = data.getBundleExtra("User_Info");
+                vo = (UserInfoVO) bundle.getSerializable("UserInfoVO");
+
+                if(vo.getFamilyID() != 0){
+
+                    Button register_home = findViewById(R.id.button_register_Home);
+                    register_home.setVisibility(View.INVISIBLE);
+                    LinearLayout linearLayout = findViewById(R.id.main_button_LinearLayout);
+                    linearLayout.removeView(register_home);
+
+                }else{
+                    findViewById(R.id.button_register_Home).setOnClickListener(handler);
+                }
+
+                break;
+            case RequestCode.ADD_DEVICE:                       // add_device에서 돌아왔을때
+                break;
+        }
+
+    }
 
     void doServerConnect(String url,String jsoinType, String requestInfo ){
 
@@ -149,7 +250,6 @@ public class Project_Main extends AppCompatActivity {
 
                     Bundle bundle = new Bundle();
 
-
                     bundle.putSerializable("Grid_items",gsonResponse_add_device);
                     ArrayList<Single_Grid_item_VO> single_grid_item_vos = new ArrayList<Single_Grid_item_VO>();
                     for(String s : gsonResponse_add_device.getItems()){
@@ -180,7 +280,9 @@ public class Project_Main extends AppCompatActivity {
 
                                 Intent intent = new Intent(getApplicationContext(),Add_device_Activity.class);
                                 intent.putExtra("Grid_info",bundle);
-                                startActivityForResult(intent,REQUEST_CODE_MENU);
+                                intent.putExtra("userID",userID);
+
+                                startActivityForResult(intent,RequestCode.ADD_DEVICE);
 
                                 Log.d(TAG,"기기변경 페이지러 너민당");
                                 break;
@@ -198,25 +300,34 @@ public class Project_Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        startLocationService();
+
+        LinearLayout linearLayout = findViewById(R.id.main_button_LinearLayout);
         findViewById(R.id.button_config_Myhome).setOnClickListener(handler);
         findViewById(R.id.add_device).setOnClickListener(handler);
+        Button register_home = findViewById(R.id.button_register_Home);
+        register_home.setOnClickListener(handler);
 
-        Bundle bundle = getIntent().getBundleExtra("User_Info");
-        UserInfoVO vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
+        bundle = getIntent().getBundleExtra("User_Info");
+        vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
+
+        userID = vo.getFamilyID();
 
         Log.d(TAG,vo.toString());
 
         //FamilyID확인하고 값이 0000이 아니면 집 추가 버튼 보이지 않게 하고  0000이면 집 추가 버튼 보이게 한다.
 
-        if(vo.getFamilyID() != 0){
 
-            Button register_home = findViewById(R.id.button_register_Home);
+        if(vo.getFamilyID()!=0){
+
             register_home.setVisibility(View.INVISIBLE);
-            LinearLayout linearLayout = findViewById(R.id.main_button_LinearLayout);
             linearLayout.removeView(register_home);
-
         }else{
-            findViewById(R.id.button_register_Home).setOnClickListener(handler);
+//            findViewById(R.id.button_register_Home).setOnClickListener(handler);
         }
+    }
+
+    void setUI(){
+
     }
 }

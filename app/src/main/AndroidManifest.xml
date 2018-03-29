@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity_package.Login_Activity">
+        <activity android:name=".Activity_package.Loading_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,6 +30,11 @@
         <activity android:name=".Activity_package.Smart_Plug"/>
         <activity android:name=".Activity_package.Admit_Activity"/>
         <activity android:name=".Activity_package.Add_device_Activity"/>
+        <activity android:name=".Activity_package.Login_Activity"/>
+        <activity android:name=".Activity_package.Add_Home_Activity"/>
+        <activity android:name=".Activity_package.Config_MyHome"/>
+        <activity android:name=".Activity_package.Find_Family_Activity"/>
+        <activity android:name=".Activity_package.Create_Family_Activity"/>
 
         <service
             android:name=".FCM_package.MyFirebaseMessagingService"

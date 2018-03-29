@@ -12,6 +12,9 @@ public class GsonResponse_add_device implements Serializable {
     String event;
     ArrayList<String> items;
 
+    //일단 이미진ㄴ 받지 않음
+
+
     public GsonResponse_add_device(){}
 
     public GsonResponse_add_device(ArrayList<String> items) {

@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/strok_all"
+    android:layout_height="60dp"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/list_item_imageview"
         android:layout_width="60dp"
         android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
         android:src="@drawable/mainlogo" />
 
     <TextView
         android:id="@+id/single_list_deive"
-        android:layout_width="236dp"
+        android:layout_width="223dp"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="디바이스 명"
-        android:textSize="30dp" />
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20dp" />
 
-    <Button
-        android:id="@+id/button_single_list_name"
+    <TextView
+        android:id="@+id/textView_Function_Nu"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="디바이스 명"
+        android:textColor="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/textView_Single_List_stats"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ON" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/ON"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20sp" />
 
 </LinearLayout>
