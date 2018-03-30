@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.user.myhomejarvis.Activity_package.Login_Activity;
+import com.example.user.myhomejarvis.Activity_package.Project_Main;
 import com.example.user.myhomejarvis.Activity_package.Regist_Family_Request_Activity;
 import com.example.user.myhomejarvis.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -70,6 +71,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             intent.putExtra("familyID", key3);
         } else if ("AddFamilyResult".equals(key1)) {
             intent = new Intent(this, Login_Activity.class);
+        } else {
+            intent = new Intent(this, Project_Main.class);
         }
 
         if (intent != null) {

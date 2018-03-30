@@ -20,6 +20,7 @@ public class Server_URL {
     private static final String addFamily_URL = "http://192.168.0.8:8080/JavisProject/addfamily.in";
     private static final String insertFamily_URL = "http://192.168.0.8:8080/JavisProject/insertfamily.in";
     private static final String returnFamilyRegist_URL = "http://192.168.0.8:8080/JavisProject/returnfamilyregistresult.in";
+    private static final String fan_onoff_url = "http://192.168.0.8:8080/JavisProject/fan.in";
 
 
     public static String getSmartplug_URL() {
@@ -27,7 +28,9 @@ public class Server_URL {
     }
 
 
-
+    public static String getFan_onoff_url() {
+        return fan_onoff_url;
+    }
 
     public static String getJoin_URL() {
         return join_URL;

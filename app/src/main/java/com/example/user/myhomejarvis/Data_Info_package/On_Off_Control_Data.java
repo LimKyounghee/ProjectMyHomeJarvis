@@ -6,16 +6,16 @@ package com.example.user.myhomejarvis.Data_Info_package;
 
 public class On_Off_Control_Data {
 
-    String userid;
+    String userId;;
     String deviceId;
     String eventInfo;
 
     public String getUserid() {
-        return userid;
+        return userId;
     }
 
     public void setUserid(String userid) {
-        this.userid = userid;
+        this.userId = userid;
     }
 
     public String getDeviceId() {
@@ -32,5 +32,14 @@ public class On_Off_Control_Data {
 
     public void setEventInfo(String eventInfo) {
         this.eventInfo = eventInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "On_Off_Control_Data{" +
+                "userid='" + userId + '\'' +
+                ", deviceId='" + deviceId + '\'' +
+                ", eventInfo='" + eventInfo + '\'' +
+                '}';
     }
 }

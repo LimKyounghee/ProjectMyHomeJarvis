@@ -18,6 +18,11 @@
     <string name="ON">ON</string>
     <string name="OFF">OFF</string>
 
+    <!--선풍기 끄기-->
+    <string name="fan_off">끄기</string>
+    <!--on Off 한글-->
+    <string name="korean_on">켜짐</string>
+    <string name="korean_off">꺼짐</string>
 
     <!--기기등록 페이지 에 들어갈 말들-->
     <string name="brand">브랜드 명</string>
@@ -26,4 +31,9 @@
 
     <!--검색 버튼-->
     <string name="search">검색</string>
+
+    <!--선풍기 조절-->
+    <string name="weak">약</string>
+    <string name="mid">중</string>
+    <string name="strong">강</string>
 </resources>

@@ -1,5 +1,8 @@
 package com.example.user.myhomejarvis.Activity_package;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +20,8 @@ import android.widget.Toast;
 import com.example.user.myhomejarvis.Data_Info_package.Config_device;
 import com.example.user.myhomejarvis.Data_Info_package.On_Off_Control_Data;
 import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
+import com.example.user.myhomejarvis.Fragment_package.Config_myhome_fragmenr_fan_button;
+import com.example.user.myhomejarvis.Fragment_package.Config_myhome_fragmenr_home_picure;
 import com.example.user.myhomejarvis.Gson_package.GsonResponse_Config_device;
 import com.example.user.myhomejarvis.Gson_package.GsonResponse_Join;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
@@ -41,6 +46,10 @@ public class Config_MyHome extends AppCompatActivity {
 
     private static final String TAG = "Config_MyHome";
 
+    Fragment fragment_picture = new Config_myhome_fragmenr_home_picure();
+    Fragment fragment_fan_button = new Config_myhome_fragmenr_fan_button();
+    String request_fragment;
+
     Bundle bundle;
     UserInfoVO vo;
     TextView contentText;
@@ -58,6 +67,32 @@ public class Config_MyHome extends AppCompatActivity {
     ArrayList<Config_device> config_devices = new ArrayList<Config_device>();
     ListView listView_Device;
     int this_position;
+
+    void doFragmentPage(String deviceID){
+        //프레그 먼트 페이지를 쓰도록한
+
+        Fragment fragment;
+        Bundle bundle = new Bundle();
+        bundle.putString("deviceID",deviceID);
+        bundle.putString("userID",userID);
+
+
+        if(("fan").equals(request_fragment)){
+
+            fragment = fragment_fan_button;
+        }else{
+
+            fragment = fragment_picture;
+        }
+
+        fragment.setArguments(bundle);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_picture_or_button,fragment);
+        fragmentTransaction.commit();
+
+    }
 
 
     void doShow_config_page(){
@@ -141,6 +176,10 @@ public class Config_MyHome extends AppCompatActivity {
 
         familyID = vo.getFamilyID();
         userID = vo.getUserID();
+        Log.d(TAG,"유저 ㅇ이디" + userID);
+
+        request_fragment = "선풍기 아님";
+        doFragmentPage("no");
 
         listView = findViewById(R.id.listView_config_home);
 //
@@ -182,6 +221,9 @@ public class Config_MyHome extends AppCompatActivity {
 
                 if(funtion_Num == 1) {
                     //여기서 온 오프 할 수 있게 하기
+//
+//                    request_fragment = "선풍기 아님";
+//                    doFragmentPage(device);
 
                     int indx = -1;
 
@@ -221,12 +263,12 @@ public class Config_MyHome extends AppCompatActivity {
 
                                 switch (status){
 
-                                    case "ON":
-                                        do_ON_OFF_Action(device_Name,status,type);
+                                    case "켜짐":
+                                        do_ON_OFF_Action(device_Name,"꺼짐",type);
                                         break;
 
-                                    case "OFF":
-                                        do_ON_OFF_Action(device_Name,status,type);
+                                    case "꺼짐":
+                                        do_ON_OFF_Action(device_Name,"켜짐",type);
                                         break;
                                 }
 
@@ -242,12 +284,12 @@ public class Config_MyHome extends AppCompatActivity {
 
                                 switch (status){
 
-                                    case "ON":
-                                        do_ON_OFF_Action(device_Name,status,type);
+                                    case "켜짐":
+                                        do_ON_OFF_Action(device_Name,"꺼짐",type);
                                         break;
 
-                                    case "OFF":
-                                        do_ON_OFF_Action(device_Name,status,type);
+                                    case "꺼짐":
+                                        do_ON_OFF_Action(device_Name,"켜짐",type);
                                         break;
                                 }
                                 break;
@@ -259,10 +301,12 @@ public class Config_MyHome extends AppCompatActivity {
 
                             case "Humi":
 
+
                                 // 습도도 클릭해서 보여줄 필요가 없음
                                 break;
 
                             case "Cooler" :
+
 
                                 //쿨러 역시.. 하지만 나중에 컨트롤링 할 수 있게 할 수도 있당
 
@@ -277,20 +321,23 @@ public class Config_MyHome extends AppCompatActivity {
 
                     int indx = 0;
 
-                    while(indx != -1){
+                    for(int i = 0; i <device_list.length;i++){
 
-                        int  i = 0;
                         indx = device_Name.indexOf(device_list[i]);
-                        device = device_list[i];
-                        Log.d(TAG,"device 정보 와일문 안에서 " + device);
-                        i++;
+                        Log.d(TAG,"device 정보 포문 안에서 " + device);
+                        if(indx != -1){
+                            device = device_list[i];
+                            Log.d(TAG,"device 정보 포문 안에서 " + device);
+                            break;
+                        }
                     }
-                    Log.d(TAG,"device 정보  와일문 통과후" + device);
 
                     switch (device){
 
                         case "Fan" :
 
+                            request_fragment = "fan";
+                            doFragmentPage(device_Name);
                             //일단 다른페이지 로가서 할 것은 선풍기 밖에 엄ㅅㅂ음
                             break;
                     }
@@ -312,6 +359,9 @@ public class Config_MyHome extends AppCompatActivity {
         on_off_control_data.setUserid(userID);
         on_off_control_data.setDeviceId(deviceID);
         on_off_control_data.setEventInfo(request_Status);
+
+
+        Log.d(TAG,"On_Off_Control_Data ????????" +on_off_control_data);
 
         Log.d(TAG," On_Off_Control_Data 에 저장" + on_off_control_data.toString());
 
@@ -372,18 +422,18 @@ public class Config_MyHome extends AppCompatActivity {
                             case "plugOnOff" :
 
                                 //플러그 제어할때
-                                switch (getEvent){
+                                switch (getStatus){
 
-                                    case "ON":
-                                        get_status="ON";
+                                    case "켜짐":
+                                        get_status="켜짐";
                                         configDevice.setDeviceStatus(get_status);
                                         adaper.notifyDataSetChanged();
 
                                         break;
 
-                                    case "OFF":
+                                    case "꺼짐":
 
-                                        get_status="OFF";
+                                        get_status="꺼짐";
                                         configDevice.setDeviceStatus(get_status);
                                         adaper.notifyDataSetChanged();
                                         break;
@@ -394,19 +444,19 @@ public class Config_MyHome extends AppCompatActivity {
                             case "lightOnOff":
 
                                 //전구 제어 할때
-                                switch (getEvent){
+                                switch (getStatus){
 
-                                    case "ON":
+                                    case "켜짐":
 
-                                        get_status="ON";
+                                        get_status="켜짐";
                                         configDevice.setDeviceStatus(get_status);
                                         adaper.notifyDataSetChanged();
 
                                         break;
 
-                                    case "OFF":
+                                    case "꺼짐":
 
-                                        get_status="OFF";
+                                        get_status="꺼짐";
                                         configDevice.setDeviceStatus(get_status);
                                         adaper.notifyDataSetChanged();
 
