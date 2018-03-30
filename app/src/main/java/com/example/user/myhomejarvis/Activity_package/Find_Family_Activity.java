@@ -13,14 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.user.myhomejarvis.Data_Info_package.FindFamilyVO;
 import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
-import com.example.user.myhomejarvis.Gson_package.GsonResponse_Login;
+import com.example.user.myhomejarvis.Gson_package.GsonResponse_Join;
 import com.example.user.myhomejarvis.Gson_package.GsonResponse_add_family;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.ListView_Util.Find_family_LinearLayout;
@@ -28,10 +27,12 @@ import com.example.user.myhomejarvis.ListView_Util.Find_family_item_VO;
 import com.example.user.myhomejarvis.LogManager;
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
-import com.example.user.myhomejarvis.Server_Connection_package.ServerConnectionWithoutHandler;
 import com.example.user.myhomejarvis.Server_Connection_package.Server_URL;
+import com.example.user.myhomejarvis.Server_Connection_package.Util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Kyun on 2018-03-27.
@@ -47,6 +48,9 @@ public class Find_Family_Activity extends AppCompatActivity {
     String url = Server_URL.getFindFamily_URL();
     String phoneNum ="";
     FindFamilyVO familyVO;
+    ThreadHandler2 threadHandler2 = new ThreadHandler2();
+
+    String result ;
 
     View.OnClickListener handler = new View.OnClickListener() {
         @Override
@@ -193,25 +197,144 @@ public class Find_Family_Activity extends AppCompatActivity {
                 break;
 
         }
+
+        AlertDialog dialog =builder.create();
+        dialog.show();
     }
 
     public void sendToServerForRegistFamily(String phone) {
         ServerConnectionWithoutHandler serverCon;
         String data1 = phone;
-        String data2 = vo.getUserID();   // 다시 서버에 보내야할 data를 저장
+        String data2 = vo.getName();   // 다시 서버에 보내야할 data를 저장
+        String data3 = vo.getUserID();
+        int data4 = familyVO.getFamilyID();
+
+        LogManager.print(String.format("phone : %s, userName : %s, userID : %s, familyID : %d", data1, data2, data3, data4));
         String type1 = "phone";
-        String type2 = "userID";
+        String type2 = "userName";
+        String type3 = "userID";
+        String type4 = "familyID";
         String url = Server_URL.getAddFamily_URL();
 
+
         try{
-            serverCon = new ServerConnectionWithoutHandler(data1, data2, type1, type2, url);
+            serverCon = new ServerConnectionWithoutHandler(data1, data2, data3, data4, type1, type2, type3, type4, url);
             LogManager.print("쓰래드 시작");
             serverCon.start();
+//            result = serverCon.getResult();
+
         }catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    class ServerConnectionWithoutHandler extends Thread {
 
+        private final static String TAG = "ServerConnection";
+
+        String data1;
+        String data2;
+        String data3;
+        int data4;
+        String url;
+        String type1;
+        String type2;
+        String type3;
+        String type4;
+//        String result;
+
+        public ServerConnectionWithoutHandler(String data1, String data2, String data3, int data4,
+                                              String type1, String type2, String type3, String type4, String url) {
+            this.data1 = data1;
+            this.data2 = data2;
+            this.data3 = data3;
+            this.data4 = data4;
+            this.type1 = type1;
+            this.type2 = type2;
+            this.type3 = type3;
+            this.type4 = type4;
+            this.url = url;
+        }
+
+        public void run() {
+            result = sendToServer();
+            LogManager.print("서버로 보낸 결과 : " + result);
+
+            Message message = new Message();
+            Bundle b = message.getData();
+            b.putString("data", result);
+//            ThreadHandler2 threadHandler2 = new ThreadHandler2();
+            threadHandler2.sendMessage(message);
+            Log.d(TAG,"쓰레드 핸들러 들어감 " + result);
+        }
+
+        String sendToServer(){
+
+            Map<String, String> params = new HashMap<String, String>();
+            params.put(type1,data1);
+            params.put(type2,data2);
+            params.put(type3,data3);
+            params.put(type4,Integer.toString(data4));
+            Util util = new Util();
+            String result ="";
+
+            try{
+
+                result = util.sendPost(url,params);
+            }catch (Exception e){
+
+                e.getStackTrace();
+            }
+
+            return  result;
+
+        }
+
+    }
+
+    class ThreadHandler2 extends Handler {
+
+        @Override
+        public void handleMessage(Message msg) {
+            LogManager.print("핸들러 연결");
+            super.handleMessage(msg);
+
+            if (msg != null) {
+
+                Bundle b = msg.getData();
+                String result = b.getString("data");
+                if (("").equals(result)) {
+                    Toast.makeText(getApplicationContext(), "서버와 통신 실패", Toast.LENGTH_SHORT).show();
+                } else {
+                    LogManager.print("result : " + result);
+                    Gsonresult gsonresult = new Gsonresult();
+
+                    GsonResponse_Join gsonResponse;
+
+                    gsonResponse = gsonresult.getStatus_join(result);
+
+                    if(gsonResponse == null) {
+                        LogManager.print("gsonResponse null 값나옴");
+                    }else{
+                        //그래서 결과를 바탕으로 메세지 박스를 만든다.
+                        String getEvent = gsonResponse.getEvent();
+                        String getStatus = gsonResponse.getStatus();
+
+                        if(getEvent.equals("Add Family")){
+
+                            if(getStatus.equals("ok")){
+
+                                Toast.makeText(getApplicationContext(), "가족이 신청을 확인할 때 까지 기다려주십시오.", Toast.LENGTH_LONG).show();
+
+                            }else{
+                                Toast.makeText(getApplicationContext(), "서버 오류. 잠시후 다시 시도해주십시오.", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override

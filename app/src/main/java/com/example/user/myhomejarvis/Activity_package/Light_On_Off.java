@@ -27,7 +27,7 @@ public class Light_On_Off extends AppCompatActivity {
 
     private static final String TAG = "Light_On_Off";
 
-    String url = Server_URL.getLed_URL();
+    String url = Server_URL.getLed_onoff_URL();
 
 
     View.OnClickListener handler = new View.OnClickListener() {

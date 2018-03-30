@@ -35,5 +35,12 @@ public class LED_Data {
         this.eventInfo = eventInfo;
     }
 
-
+    @Override
+    public String toString() {
+        return "LED_Data{" +
+                "userId='" + userId + '\'' +
+                ", deviceId='" + deviceId + '\'' +
+                ", eventInfo='" + eventInfo + '\'' +
+                '}';
+    }
 }

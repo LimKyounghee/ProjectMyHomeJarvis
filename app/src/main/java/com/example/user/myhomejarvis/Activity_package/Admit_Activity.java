@@ -94,6 +94,7 @@ public class Admit_Activity extends AppCompatActivity{
             }
         });
         builder.create();
+        builder.show();
     }
 
     @Override

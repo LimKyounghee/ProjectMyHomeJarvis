@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -149,7 +150,7 @@ public class Project_Main extends AppCompatActivity {
         }
     };
 
-    void doChangePage(Object page_Name, int reuqestCode){
+    void doChangePage(Object page_Name, int requestCode){
 
         Log.d(TAG,page_Name.getClass().getName());
 
@@ -162,8 +163,14 @@ public class Project_Main extends AppCompatActivity {
 
 
         // 사용자 정보 전달한다.
-        startActivityForResult(intent,reuqestCode);
-        Log.d(TAG,"전구 페이지로 넘어가냐?");
+
+        if (requestCode == RequestCode.ADD_MYHOME) {
+            startActivity(intent);
+            finish();
+        } else {
+            startActivityForResult(intent, requestCode);
+            Log.d(TAG, "전구 페이지로 넘어가냐?");
+        }
 
     }
 
@@ -177,23 +184,6 @@ public class Project_Main extends AppCompatActivity {
 
         switch (requestCode) {
             case RequestCode.CONFIG_MYHOME:                       // config_home에서 돌아왔을때
-                break;
-            case RequestCode.ADD_MYHOME:                       // add_home에서 돌아왔을때
-                // 변경된 User_info를 다시 저장함
-                bundle = data.getBundleExtra("User_Info");
-                vo = (UserInfoVO) bundle.getSerializable("UserInfoVO");
-
-                if(vo.getFamilyID() != 0){
-
-                    Button register_home = findViewById(R.id.button_register_Home);
-                    register_home.setVisibility(View.INVISIBLE);
-                    LinearLayout linearLayout = findViewById(R.id.main_button_LinearLayout);
-                    linearLayout.removeView(register_home);
-
-                }else{
-                    findViewById(R.id.button_register_Home).setOnClickListener(handler);
-                }
-
                 break;
             case RequestCode.ADD_DEVICE:                       // add_device에서 돌아왔을때
                 break;
@@ -298,6 +288,7 @@ public class Project_Main extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.main);
 
         startLocationService();

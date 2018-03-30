@@ -7,7 +7,6 @@ package com.example.user.myhomejarvis.Server_Connection_package;
 public class Server_URL {
 
     private static final String smartplug_URL = "http://192.168.0.8:8080/JavisProject/plug.in";
-    private static final String led_URL = "http://192.168.0.8:8080/JavisProject/light.in";
     private static final String join_URL = "http://192.168.0.8:8080/JavisProject/signin.in";
     private static final String login_URL = "http://192.168.0.8:8080/JavisProject/login.in";
     private static final String led_onoff_URL = "http://192.168.0.8:8080/JavisProject/light.in";
@@ -15,10 +14,13 @@ public class Server_URL {
     private static final String brand = "http://192.168.0.8:8080/JavisProject/brand.in";
     private static final String device = "http://192.168.0.8:8080/JavisProject/devices.in";
     private static final String findFamily_URL = "http://192.168.0.8:8080/JavisProject/findfamilyinfo.in";
-    private static final String addFamily_URL = "http://192.168.0.8:8080/JavisProject/addfamilyinfo.in";
     private static final String device_detail = "http://192.168.0.8:8080/JavisProject/devicedetail.in";
     private static final String add_device = "http://192.168.0.8:8080/JavisProject/registfamilydevice.in";
     private static final String config_Home = "http://192.168.0.8:8080/JavisProject/configurationhome.in";
+    private static final String addFamily_URL = "http://192.168.0.8:8080/JavisProject/addfamily.in";
+    private static final String insertFamily_URL = "http://192.168.0.8:8080/JavisProject/insertfamily.in";
+    private static final String returnFamilyRegist_URL = "http://192.168.0.8:8080/JavisProject/returnfamilyregistresult.in";
+
 
     public static String getSmartplug_URL() {
         return smartplug_URL;
@@ -26,9 +28,6 @@ public class Server_URL {
 
 
 
-    public static String getLed_URL() {
-        return led_URL;
-    }
 
     public static String getJoin_URL() {
         return join_URL;
@@ -55,6 +54,7 @@ public class Server_URL {
 
     public static String getAddFamily_URL() {return addFamily_URL;}
 
+
     public static String getDevice_detail() {
         return device_detail;
     }
@@ -64,7 +64,13 @@ public class Server_URL {
     }
 
     public static String getConfig_Home() {
-        return config_Home;
+        return config_Home;}
+
+    public static String getInsertFamily_URL() {return  insertFamily_URL;}
+
+    public static String getReturnFamilyRegist_URL() {
+        return returnFamilyRegist_URL;
+
     }
 }
 

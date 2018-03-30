@@ -2,11 +2,13 @@ package com.example.user.myhomejarvis.Gson_package;
 
 import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
 
+import java.io.Serializable;
+
 /**
  * Created by user on 2018-03-21.
  */
 
-public class GsonResponse_Login{
+public class GsonResponse_Login implements Serializable {
 
     private String event;
     private String status;

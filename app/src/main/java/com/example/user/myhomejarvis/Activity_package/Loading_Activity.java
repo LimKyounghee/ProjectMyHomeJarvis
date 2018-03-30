@@ -87,10 +87,10 @@ public class Loading_Activity extends AppCompatActivity {
                 num += step;
                 LogManager.print("num : " + num);
                 if (num == 34 || num == 72 ) {
-                    SystemClock.sleep(1500);
+                    SystemClock.sleep(1000);
                 }
                 publishProgress(num);
-                SystemClock.sleep(100);
+                SystemClock.sleep(60);
             }
             // 권한이 있으면 바로 로그인 화면으로  없으면 권한 부여화면으로 이동
             if(PermissionUtil.checkPermissions(Loading_Activity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
