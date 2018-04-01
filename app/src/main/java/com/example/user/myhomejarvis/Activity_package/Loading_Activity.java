@@ -87,7 +87,7 @@ public class Loading_Activity extends AppCompatActivity {
                 num += step;
                 LogManager.print("num : " + num);
                 if (num == 34 || num == 72 ) {
-                    SystemClock.sleep(1000);
+                    SystemClock.sleep(600);
                 }
                 publishProgress(num);
                 SystemClock.sleep(60);
@@ -101,9 +101,11 @@ public class Loading_Activity extends AppCompatActivity {
                 LogManager.print("바로 로그인 화면으로 이동");
                 Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
                 startActivity(intent);
+                finish();
             }else {
                 Intent intent = new Intent(getApplicationContext(), Admit_Activity.class);
                 startActivity(intent);
+                finish();
             }
             return "succes";
         }

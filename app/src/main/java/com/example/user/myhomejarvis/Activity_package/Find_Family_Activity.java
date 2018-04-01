@@ -118,6 +118,7 @@ public class Find_Family_Activity extends AppCompatActivity {
                         if(getEvent.equals("FindFamilyInfo")){
                             if(findFamilyVO == null) {
                                 Toast.makeText(getApplicationContext(), "해당 휴대전화번호로 등록된 가족이 없습니다.", Toast.LENGTH_LONG).show();
+                                showMessage("search_fail");
                             }else {
                                 // 리스트 뷰에 화면 출력
                                 int image = R.drawable.family;

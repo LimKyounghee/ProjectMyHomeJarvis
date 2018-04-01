@@ -37,6 +37,7 @@
         <activity android:name=".Activity_package.Create_Family_Activity"/>
         <activity android:name=".Activity_package.Regist_Family_Request_Activity"/>
         <activity android:name=".Activity_package.Find_Family_List"/>
+        <activity android:name=".Activity_package.Streaming_Activity"/>
 
 
 
@@ -57,11 +58,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-
-
-
-
 
 
 

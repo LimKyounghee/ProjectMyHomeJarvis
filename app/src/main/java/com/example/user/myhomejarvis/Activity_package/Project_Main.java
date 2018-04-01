@@ -2,6 +2,7 @@ package com.example.user.myhomejarvis.Activity_package;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -309,21 +310,33 @@ public class Project_Main extends AppCompatActivity {
         findViewById(R.id.button_find_familyList).setOnClickListener(handler);
 
         bundle = getIntent().getBundleExtra("User_Info");
-        vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
+        if (bundle != null) {
+            vo = (UserInfoVO) bundle.getSerializable("UserInfoVO");
 
-        userID = vo.getFamilyID();
+            //SaredPreference에  값 저장하기
+            SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("userID", vo.getUserID());
+            editor.commit();
 
-        Log.d(TAG,vo.toString());
+            userID = vo.getFamilyID();
 
-        //FamilyID확인하고 값이 0000이 아니면 집 추가 버튼 보이지 않게 하고  0000이면 집 추가 버튼 보이게 한다.
+            Log.d(TAG, vo.toString());
+
+            //FamilyID확인하고 값이 0000이 아니면 집 추가 버튼 보이지 않게 하고  0000이면 집 추가 버튼 보이게 한다.
 
 
-        if(vo.getFamilyID()!=0){
+            if (vo.getFamilyID() != 0) {
 
-            register_home.setVisibility(View.INVISIBLE);
-            linearLayout.removeView(register_home);
-        }else{
+                register_home.setVisibility(View.INVISIBLE);
+                linearLayout.removeView(register_home);
+            } else {
 //            findViewById(R.id.button_register_Home).setOnClickListener(handler);
+            }
+        }else {
+            Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
+            startActivity(intent);
+            finish();
         }
     }
 

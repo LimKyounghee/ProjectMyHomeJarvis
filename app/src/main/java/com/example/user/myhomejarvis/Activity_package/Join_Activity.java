@@ -338,7 +338,9 @@ public class Join_Activity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
 
                         Intent intent = new Intent(getApplicationContext(),Login_Activity.class);
-                        startActivityForResult(intent,REQUEST_CODE_MENUE);
+//                        startActivityForResult(intent,REQUEST_CODE_MENUE);
+                        startActivity(intent);
+                        finish();
 
                         Log.d(TAG, "확인버튼 누름");
                     }
@@ -355,7 +357,9 @@ public class Join_Activity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
 
                         Intent intent = new Intent(getApplicationContext(),Join_Activity.class);
-                        startActivityForResult(intent,REQUEST_CODE_MENUE);
+//                        startActivityForResult(intent,REQUEST_CODE_MENUE);
+                        startActivity(intent);
+                        finish();
 
                         Log.d(TAG, "확인버튼 누름");
                     }
