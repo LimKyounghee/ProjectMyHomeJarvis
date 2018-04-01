@@ -146,6 +146,12 @@ public class Project_Main extends AppCompatActivity {
                     }
 
                     break;
+
+                case R.id.button_find_familyList:
+                    Find_Family_List find_family_list = new Find_Family_List();
+                    doChangePage(find_family_list,RequestCode.FAMILY_LIST);
+
+                    break;
             }
         }
     };
@@ -298,6 +304,9 @@ public class Project_Main extends AppCompatActivity {
         findViewById(R.id.add_device).setOnClickListener(handler);
         Button register_home = findViewById(R.id.button_register_Home);
         register_home.setOnClickListener(handler);
+
+        //이거는 바꿔야 한당 가족 리스트 보는 ㅂ튼!@
+        findViewById(R.id.button_find_familyList).setOnClickListener(handler);
 
         bundle = getIntent().getBundleExtra("User_Info");
         vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");

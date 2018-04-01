@@ -12,17 +12,15 @@
         android:layout_height="284dp"
         android:background="@drawable/background2">
 
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <Button
-            android:layout_width="match_parent"
+            android:id="@+id/button_find_familyList"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="여기에 날씨 정보 넣어주기"/>
-
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="가족 리스트 보기"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 

@@ -527,6 +527,8 @@ public class Config_MyHome extends AppCompatActivity {
             view.setStatusView(item.getDeviceStatus());
             view.setFunction_Num(item.getFunction());
 
+            //이미지 추가 할 수 있으면 해주기
+
             return view;
 
         }

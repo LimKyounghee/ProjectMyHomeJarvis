@@ -3,6 +3,7 @@ package com.example.user.myhomejarvis.Gson_package;
 import android.util.Log;
 
 import com.example.user.myhomejarvis.Data_Info_package.DeviceVO;
+import com.example.user.myhomejarvis.Data_Info_package.UserInfoListData;
 import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
 import com.google.gson.Gson;
 
@@ -84,6 +85,21 @@ public class Gsonresult {
             e.printStackTrace();
         }
         return gsonResponse_config_device;
+    }
+
+    public UserInfoListData getResponse_family_list(String result){
+        Gson gson = new Gson();
+        UserInfoListData userInfoListData = null;
+
+        try{
+
+            userInfoListData = gson.fromJson(result,UserInfoListData.class);
+            Log.d(TAG,"userInfoListData fromjson 성공함");
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+        return userInfoListData;
     }
 
     public GsonResponse_add_family getResponse_add_family(String result){

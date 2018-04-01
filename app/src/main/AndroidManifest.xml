@@ -36,6 +36,8 @@
         <activity android:name=".Activity_package.Find_Family_Activity"/>
         <activity android:name=".Activity_package.Create_Family_Activity"/>
         <activity android:name=".Activity_package.Regist_Family_Request_Activity"/>
+        <activity android:name=".Activity_package.Find_Family_List"/>
+
 
 
         <service
