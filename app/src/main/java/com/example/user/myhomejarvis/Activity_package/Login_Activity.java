@@ -79,20 +79,26 @@ public class Login_Activity extends AppCompatActivity {
         switch (type){
 
             case "id_config":
-                intent = new Intent(getApplicationContext(),Project_Main.class);
-                startActivityForResult(intent,REQUEST_CODE_MENUE);
+                intent = new Intent(getApplicationContext(),Login_Activity.class);
+//                startActivityForResult(intent,REQUEST_CODE_MENUE);
+                startActivity(intent);
+                finish();
                 break;
                 //여기는 아이디 찾기 페이지로 간다
 
             case "pw_config":
-                intent = new Intent(getApplicationContext(),Project_Main.class);
-                startActivityForResult(intent,REQUEST_CODE_MENUE);
+                intent = new Intent(getApplicationContext(),Login_Activity.class);
+//                startActivityForResult(intent,REQUEST_CODE_MENUE);
+                startActivity(intent);
+                finish();
                 //여기는 비번 찾기 페이지로 간당
                 break;
 
             case "login_to_join":
                 intent = new Intent(getApplicationContext(),Join_Activity.class);
-                startActivityForResult(intent,REQUEST_CODE_MENUE);
+//                startActivityForResult(intent,REQUEST_CODE_MENUE);
+                startActivity(intent);
+                finish();
                 //여기는 비번 찾기 페이지로 간당
                 break;
         }
@@ -249,11 +255,13 @@ public class Login_Activity extends AppCompatActivity {
                                     //Bundle bundle = getIntent().getExtras();
 //                                bundle.getSerializable("UserInfoVO");
 
-                                    startActivityForResult(intent, REQUEST_CODE_MENUE);
+                                    startActivity(intent);
 
                                     Log.d(TAG, "메인으로 넘어감");
                                     //로그인 정보도 넘겨주기
                                     //여기에다가 넘겨준다
+
+                                    finish();
 
 
                                 } else {

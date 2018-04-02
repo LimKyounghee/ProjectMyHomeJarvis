@@ -22,6 +22,7 @@ public class Server_URL {
     private static final String returnFamilyRegist_URL = "http://192.168.0.8:8080/JavisProject/returnfamilyregistresult.in";
     private static final String fan_onoff_url = "http://192.168.0.8:8080/JavisProject/fan.in";
     private static final String family_list = "http://192.168.0.8:8080/JavisProject/familylist.in";
+    private static final String DoorRequest_URL = "http://192.168.0.8:8080/JavisProject/doorrquest.in";
 
     public static String getFamily_list() {
         return family_list;
@@ -78,6 +79,9 @@ public class Server_URL {
     public static String getReturnFamilyRegist_URL() {
         return returnFamilyRegist_URL;
 
+    }
+    public static String getDoorRequest_URL() {
+        return DoorRequest_URL;
     }
 }
 
