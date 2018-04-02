@@ -17,8 +17,8 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="디바이스 명"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="20dp" />
+        android:textColor="@color/myhomeFontColor"
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/textView_Function_Nu"

@@ -6,16 +6,29 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ActionMenuView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.example.user.myhomejarvis.Data_Info_package.Request_Info;
 import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
@@ -26,7 +39,11 @@ import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.RequestCode;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
 import com.example.user.myhomejarvis.Server_Connection_package.Server_URL;
+import com.example.user.myhomejarvis.Server_Connection_package.Weather_API;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 
@@ -34,7 +51,7 @@ import java.util.ArrayList;
  * Created by user on 2018-03-21.
  */
 
-public class Project_Main extends AppCompatActivity {
+public class Project_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private final static String TAG = "Project_Main";
     Bundle bundle;
@@ -45,14 +62,140 @@ public class Project_Main extends AppCompatActivity {
     double myLocation_longitude;
     double myLocation_Latitude;
 
+    String sky;
+    String temperature;
+    String humidity;
+    String station;
+
+    TextView stationText;
+    TextView tempText;
+    TextView humiText;
+    ImageView weatherImage;
+
+    TextView drawer_userID;
+    TextView drawer_userName;
+
+
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+
+    String user_ID_to_Drawer;
+    String user_Name_to_Drawer;
+
+
+
+
 // 위치정보 받기 시작?//////////////////////////////////
+
+
+
+    public class WeatherTask extends AsyncTask<Void,Void,String>{
+
+        private double lat;
+        private double lon;
+
+        public WeatherTask(double lat, double lon) {
+            this.lat = lat;
+            this.lon = lon;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            getWeather_Info_API(s);
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            String result;
+            Weather_API weather_api = new Weather_API();
+            result=  weather_api.getWegher_API_Result(lat,lon);
+            return result;
+        }
+    }
+
+
+    void getWeather_Info_API(String weather_Result){
+
+        //한번 찍고 파싱하자
+
+        JsonParser parser = new JsonParser();
+
+        JsonObject parseResult = parser.parse(weather_Result).getAsJsonObject();
+
+        JsonObject weather = parseResult.get("weather").getAsJsonObject();
+
+        JsonArray _minutely =  weather.get("minutely").getAsJsonArray();
+
+        if(_minutely != null){
+
+            for(int i = 0; i<_minutely.size(); i++){
+
+                JsonObject a = _minutely.get(i).getAsJsonObject();
+
+                JsonObject _sky = a.get("sky").getAsJsonObject();
+                sky = _sky.get("name").getAsString();
+                weatherImage = findViewById(R.id.image_sky);
+                String[] sky_value ={"맑음","구름조금","구름많음","구름많고 비","구름많고 눈","구름많고 비 또는 눈","흐림",
+                        "흐리고 비","흐리고 눈","흐리고 비 또는 눈","흐리고 낙뢰","뇌우/비","뇌우/눈","뇌우/비 또는 눈"};
+                int[] sky_image_res ={
+                        R.drawable.day_clear_01,R.drawable.day_cloudy_02,R.drawable.day_partly_cloud_03,R.drawable.day_rain_04,
+                        R.drawable.day_snow_05,R.drawable.rain_or_snow,R.drawable.night_cloudy_08,R.drawable.night_rain_10,
+                        R.drawable.night_snow_11,R.drawable.clody_rain_or_snow,R.drawable.night_thunder_12,R.drawable.thunder_rain,
+                        R.drawable.thinder_snow,R.drawable.thinder_rain_snow};
+
+                for(int j= 0; j <sky_value.length; j++){
+
+                    if(sky_value[j].equals(sky)){
+                        weatherImage.setImageResource(sky_image_res[j]);
+                        break;
+                    }
+
+                }
+
+                Log.d(TAG,"sky0000000000" + sky);
+
+                JsonObject _temperature = a.get("temperature").getAsJsonObject();
+
+                temperature = _temperature.get("tc").getAsString();
+                tempText = findViewById(R.id.textView_temp);
+                tempText.setText(temperature);
+
+                Log.d(TAG,"temperature0000000000" + temperature);
+
+                humidity =a.get("humidity").getAsString();
+
+                humiText = findViewById(R.id.textView_humi);
+                humiText.setText(humidity+"%");
+
+                Log.d(TAG,"humidity0000000" + humidity);
+
+                JsonObject _station = a.get("station").getAsJsonObject();
+                station = _station.get("name").getAsString();
+
+                stationText = findViewById(R.id.textView_Station);
+                stationText.setText(station);
+
+                Log.d(TAG,"station0000000" + station);
+
+                Log.d(TAG,"몇번 돌았냐?" + i+ "번");
+
+            }
+        }
+
+
+    }
 
    private void startLocationService(){
 
        LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
        GPSListener gpsListener = new GPSListener();
-       long minTime = 10000;
+       long minTime = 100000;
        float minDistance = 0;
 
        try {
@@ -73,17 +216,19 @@ public class Project_Main extends AppCompatActivity {
 
            Location lastLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
            if (lastLocation != null) {
+
                myLocation_Latitude = lastLocation.getLatitude();
                myLocation_longitude = lastLocation.getLongitude();
 
-              Log.d(TAG, "Last Known Location : " + "Latitude : " + myLocation_Latitude + "\nLongitude:" + myLocation_longitude);
+              Log.d(TAG, "00000000000000000000Last Known Location : " + "Latitude : " + myLocation_Latitude + "\nLongitude:" + myLocation_longitude);
+
+
            }
        } catch(SecurityException ex) {
            ex.printStackTrace();
        }
 
-       Log.d(TAG,"위치저보 완ㄹ");
-
+       Log.d(TAG,"위치저보 완ㄹ + 날씨 정보도 ㅇㄷ음");
    }
 
    private class GPSListener implements LocationListener{
@@ -95,6 +240,9 @@ public class Project_Main extends AppCompatActivity {
            String msg = "Latitude : "+ myLocation_Latitude + "\nLongitude:"+ myLocation_longitude;
            Log.d(TAG, msg);
 
+           WeatherTask weatherTask = new WeatherTask(myLocation_Latitude,myLocation_longitude);
+           Log.d(TAG,"햐나>????");
+           weatherTask.execute();
        }
 
        public void onProviderDisabled(String provider) {
@@ -105,8 +253,6 @@ public class Project_Main extends AppCompatActivity {
 
        public void onStatusChanged(String provider, int status, Bundle extras) {
        }
-
-
    }
 
     View.OnClickListener handler = new View.OnClickListener() {
@@ -144,13 +290,6 @@ public class Project_Main extends AppCompatActivity {
                     } else {
                         Toast.makeText(getApplicationContext(), "가족을 등록해야 장비를 등록할 수 있습니다. \n가족등록을 먼저 하십시오.", Toast.LENGTH_SHORT).show();
                     }
-
-                    break;
-
-                case R.id.button_find_familyList:
-                    Find_Family_List find_family_list = new Find_Family_List();
-                    doChangePage(find_family_list,RequestCode.FAMILY_LIST);
-
                     break;
             }
         }
@@ -295,9 +434,42 @@ public class Project_Main extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.main);
+        setContentView(R.layout.project_main);
 
         startLocationService();
+
+        bundle = getIntent().getBundleExtra("User_Info");
+        vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
+
+
+        userID = vo.getFamilyID();
+        user_ID_to_Drawer = vo.getUserID();
+        user_Name_to_Drawer = vo.getName();
+
+        //메뉴 설정 해주기
+
+        toolbar =findViewById(R.id.toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigation_view);
+
+        View headerView = navigationView.getHeaderView(0);
+        drawer_userID = (TextView) headerView.findViewById(R.id.textView_drawer_userID);
+        drawer_userName = headerView.findViewById(R.id.textView_drawer_userName);
+
+        drawer_userID.setText(user_ID_to_Drawer);
+        drawer_userName.setText(user_Name_to_Drawer);
+
+        //툴바 생성 및 세팅
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        //액션 토글
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+
 
         LinearLayout linearLayout = findViewById(R.id.main_button_LinearLayout);
         findViewById(R.id.button_config_Myhome).setOnClickListener(handler);
@@ -305,13 +477,7 @@ public class Project_Main extends AppCompatActivity {
         Button register_home = findViewById(R.id.button_register_Home);
         register_home.setOnClickListener(handler);
 
-        //이거는 바꿔야 한당 가족 리스트 보는 ㅂ튼!@
-        findViewById(R.id.button_find_familyList).setOnClickListener(handler);
 
-        bundle = getIntent().getBundleExtra("User_Info");
-        vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
-
-        userID = vo.getFamilyID();
 
         Log.d(TAG,vo.toString());
 
@@ -323,11 +489,57 @@ public class Project_Main extends AppCompatActivity {
             register_home.setVisibility(View.INVISIBLE);
             linearLayout.removeView(register_home);
         }else{
-//            findViewById(R.id.button_register_Home).setOnClickListener(handler);
         }
     }
 
-    void setUI(){
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
 
     }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch (id){
+
+            case R.id.navigation_item_family_list:
+
+                //우리집 가족 리스트 보는 것으로 간단
+                Find_Family_List find_family_list = new Find_Family_List();
+                doChangePage(find_family_list,RequestCode.FAMILY_LIST);
+
+                break;
+
+            case R.id.navigation_item_chart:
+                Toast.makeText(getApplicationContext(), item.getTitle(),Toast.LENGTH_SHORT).show();
+                Log.d(TAG,"누름!2");
+                break;
+
+            case R.id.navigation_item_support_center:
+                Toast.makeText(getApplicationContext(), item.getTitle(),Toast.LENGTH_SHORT).show();
+                Log.d(TAG,"누름3!");
+                break;
+
+            case R.id.navigation_item_logout:
+               Login_Activity login_activity = new Login_Activity();
+               doChangePage(login_activity,RequestCode.LOGINPAGE);
+                break;
+
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
 }

@@ -64,6 +64,8 @@ public class Config_MyHome extends AppCompatActivity {
     String userID;
     String url;
 
+    String[] device_list = {"Fan","Cooler","Humi","Sound","Shock","Plug","Light","Cam","Bell","DoorLock"};
+
     ArrayList<Config_device> config_devices = new ArrayList<Config_device>();
     ListView listView_Device;
     int this_position;
@@ -239,15 +241,6 @@ public class Config_MyHome extends AppCompatActivity {
                     }
                     Log.d(TAG,"device 정보  와일문 통과후" + device);
 
-//                    while(indx == -1){
-//
-//                        int  i = 0;
-//                        indx = device_Name.indexOf(device_list[i]);
-//                        device = device_list[i];
-//                        Log.d(TAG,"device 정보 와일문 안에서 " + device);
-//                        i++;
-//                    }
-//                    Log.d(TAG,"device 정보  와일문 통과후" + device);
 
                     if(device != null) {
                         //디바이스 값이 널이 아닐때
@@ -526,6 +519,34 @@ public class Config_MyHome extends AppCompatActivity {
             view.setContentView(item.getDeviceID());
             view.setStatusView(item.getDeviceStatus());
             view.setFunction_Num(item.getFunction());
+
+            int imageID =  R.drawable.mainlogo;
+            int[] device_image_value = {
+
+                    R.drawable.cooler,R.drawable.fan, R.drawable.raindrop,R.drawable.volumecontrol,
+                    R.drawable.mainlogo,R.drawable.plug, R.drawable.lighton, R.drawable.webcam,
+                    R.drawable.alarm,R.drawable.unlocked
+            };
+
+            String device = item.getDeviceID();
+
+            int indx = -1;
+
+            for(int i = 0; i <device_list.length;i++){
+
+                indx = device.indexOf(device_list[i]);
+                Log.d(TAG,"device 정보 포문 안에서 " + device);
+                if(indx != -1){
+                    device = device_list[i];
+                    view.setList_item_imageview(device_image_value[i]);
+                    Log.d(TAG,"device 정보 포문 안에서 " + device);
+                    break;
+                }
+            }
+            Log.d(TAG,"device 정보  이미지 통과후" + device);
+
+
+
 
             //이미지 추가 할 수 있으면 해주기
 

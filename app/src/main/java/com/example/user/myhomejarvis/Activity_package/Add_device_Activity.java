@@ -505,62 +505,22 @@ public class Add_device_Activity extends AppCompatActivity {
             //여기에서 컨텍스에 맞는 이미지를 뽑을수 있게 한당
             int imageId = R.drawable.mainlogo;
 
-            switch (single_grid_item_vo.getContent_text()){
+            String[] device_value ={
+                    "Fan","Cooler","Humi","Sound","Shock","Plug",
+                    "Light","Cam","Bell","DoorLock","Samsung",
+                    "SKT","LG","GE"};
 
-                case "Fan" :
-                    imageId = R.drawable.cooler;
+            int[] device_image_value={
+                    R.drawable.cooler, R.drawable.fan,R.drawable.raindrop,R.drawable.volumecontrol,
+                    R.drawable.mainlogo,R.drawable.plug,R.drawable.lighton,R.drawable.webcam,R.drawable.alarm,
+                    R.drawable.unlocked, R.drawable.samsung,R.drawable.skt,R.drawable.lg,R.drawable.ge
+            };
+            for(int i = 0; i < device_value.length ; i++){
 
-                    break;
-
-                case "Cooler" :
-                    imageId = R.drawable.fan;
-                    break;
-
-                case "Humi" :
-                    imageId = R.drawable.raindrop;
-                    break;
-
-                case "Sound" :
-                    imageId = R.drawable.volumecontrol;
-                    break;
-
-                case "Shock" :
-                    imageId = R.drawable.mainlogo;
-                    break;
-
-                case "Plug" :
-                    imageId = R.drawable.plug;
-                    break;
-
-                case "Light" :
-                    imageId = R.drawable.lighton;
-                    break;
-
-                case "Cam" :
-                    imageId = R.drawable.webcam;
-                    break;
-
-                case "Samsung" :
-                    imageId = R.drawable.samsung;
-                    break;
-
-                case "SKT" :
-                    imageId = R.drawable.skt;
-                    break;
-
-                case "LG" :
-                    imageId = R.drawable.lg;
-                    break;
-
-                case "GE" :
-                    imageId = R.drawable.ge;
-                    break;
-
-
+                if(single_grid_item_vo.getContent_text().equals(device_value[i])){
+                    view.setImage(device_image_value[i]);
+                }
             }
-
-            view.setImage(imageId);
-
 
             return view;
         }

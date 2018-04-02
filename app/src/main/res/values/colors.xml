@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2acfcf</color>
-    <color name="colorPrimaryDark">#2acfcf</color>
+    <color name="colorPrimary">#5debeb</color>
+    <color name="colorPrimaryDark">#5debeb</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="myhomeMainColor">#2acfcf</color>
+    <color name="myhomeMainColor">#5debeb</color>
     <color name="myhomeFontColor">#4a4949</color>
     <color name="myhomeLightGray">#bebdbd</color>
     <color name="text_back">#e1e1e1</color>
+    <color name="menu_color">#5debeb</color>
 </resources>

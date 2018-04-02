@@ -12,15 +12,57 @@
         android:layout_height="284dp"
         android:background="@drawable/background2">
 
-        <Button
-            android:id="@+id/button_find_familyList"
+        <TextView
+            android:id="@+id/textView_Station"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="가족 리스트 보기"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="208dp"
+            android:text="위치"
+            android:textColor="@color/text_back"
+            android:textSize="15dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_sky"
+            android:layout_width="41dp"
+            android:layout_height="38dp"
+            app:layout_constraintStart_toStartOf="@+id/textView_Station"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Station"
+            app:srcCompat="@drawable/raindrop" />
+
+        <TextView
+            android:id="@+id/textView_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="온도"
+            android:textColor="@color/text_back"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/image_sky"
+            app:layout_constraintTop_toBottomOf="@+id/image_sky" />
+
+        <ImageView
+            android:id="@+id/imageView_Humi"
+            android:layout_width="26dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_sky"
+            app:layout_constraintStart_toEndOf="@+id/image_sky"
+            app:srcCompat="@drawable/humipercent" />
+
+        <TextView
+            android:id="@+id/textView_humi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="습도"
+            android:textColor="@color/text_back"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/imageView_Humi"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_Humi" />
+
     </android.support.constraint.ConstraintLayout>
 
 

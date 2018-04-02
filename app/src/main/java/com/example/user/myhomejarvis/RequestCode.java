@@ -11,5 +11,7 @@ public class RequestCode {
     public static final int FIND_FAMILY = 201;
     public static final int CREATE_FAMILY = 202;
     public static final int FAMILY_LIST = 301;
+    public static final int LOGINPAGE = 401;
+
 
 }
