@@ -196,7 +196,7 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
        LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
        GPSListener gpsListener = new GPSListener();
-       long minTime = 100000;
+       long minTime = 1000000;
        float minDistance = 0;
 
        try {
@@ -479,8 +479,7 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
         register_home.setOnClickListener(handler);
 
 
-<<<<<<< HEAD
-=======
+
         bundle = getIntent().getBundleExtra("User_Info");
         if (bundle != null) {
             vo = (UserInfoVO) bundle.getSerializable("UserInfoVO");
@@ -490,7 +489,6 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
             SharedPreferences.Editor editor = pref.edit();
             editor.putString("userID", vo.getUserID());
             editor.commit();
->>>>>>> 58712e18e1881314ff0fd659dcd28c2671e493a9
 
             userID = vo.getFamilyID();
 
@@ -499,11 +497,9 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
             //FamilyID확인하고 값이 0000이 아니면 집 추가 버튼 보이지 않게 하고  0000이면 집 추가 버튼 보이게 한다.
 
 
-<<<<<<< HEAD
             register_home.setVisibility(View.INVISIBLE);
             linearLayout.removeView(register_home);
-        }else{
-=======
+
             if (vo.getFamilyID() != 0) {
 
                 register_home.setVisibility(View.INVISIBLE);
@@ -515,7 +511,7 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
             startActivity(intent);
             finish();
->>>>>>> 58712e18e1881314ff0fd659dcd28c2671e493a9
+
         }
     }
 
