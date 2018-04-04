@@ -1,10 +1,15 @@
 package com.example.user.myhomejarvis.Data_Info_package;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by user on 2018-03-29.
  */
 
-public class Config_device {
+public class Config_device implements Serializable{
 
 
     private String deviceID;
@@ -12,12 +17,25 @@ public class Config_device {
     int function;
     private String device_Image;
 
+    public Config_device () {
+
+    }
+    public Config_device (Parcel in) {
+
+        deviceID = in.readString();
+        deviceStatus = in.readString();
+        function = in.readInt();
+        device_Image = in.readString();
+    }
+
     public Config_device(String deviceID, String deviceStatus, int function, String device_Image) {
         this.deviceID = deviceID;
         this.deviceStatus = deviceStatus;
         this.function = function;
         this.device_Image = device_Image;
     }
+
+
     public String getDeviceID() {
         return deviceID;
     }
@@ -43,4 +61,14 @@ public class Config_device {
         this.device_Image = device_Image;
     }
 
+    @Override
+    public String toString() {
+        return "Config_device{" +
+                "deviceID='" + deviceID + '\'' +
+                ", deviceStatus='" + deviceStatus + '\'' +
+                ", function=" + function +
+                ", device_Image='" + device_Image + '\'' +
+                '}';
+    }
 }
+

@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -38,6 +41,9 @@
         <activity android:name=".Activity_package.Regist_Family_Request_Activity"/>
         <activity android:name=".Activity_package.Find_Family_List"/>
         <activity android:name=".Activity_package.Streaming_Activity"/>
+        <activity android:name=".Activity_package.MIC_page"
+            android:theme="@style/Dialog"/>
+
 
 
 

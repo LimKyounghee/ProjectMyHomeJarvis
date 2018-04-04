@@ -3,6 +3,7 @@ package com.example.user.myhomejarvis.Activity_package;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +30,7 @@ import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.ListView_Util.Config_myhome_LinearLayout;
 import com.example.user.myhomejarvis.ListView_Util.Single_Grid_item_VO;
 import com.example.user.myhomejarvis.R;
+import com.example.user.myhomejarvis.RequestCode;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
 import com.example.user.myhomejarvis.Server_Connection_package.Server_URL;
 import com.example.user.myhomejarvis.Server_Connection_package.Util;
@@ -67,11 +70,32 @@ public class Config_MyHome extends AppCompatActivity {
     String[] device_list = {"Fan","Cooler","Humi","Sound","Shock","Plug","Light","Cam","Bell","DoorLock"};
 
     ArrayList<Config_device> config_devices = new ArrayList<Config_device>();
+//    ArrayList<String> user_devices_to_mic_page =  new ArrayList<String>();
     ListView listView_Device;
     int this_position;
 
     boolean isFan_fragment = false;
     boolean ispicture_fragment = false;
+
+    View.OnClickListener handler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+
+                case R.id.button_mic_page:
+
+                    MIC_page mic_page = new MIC_page();
+                    Intent intent = new Intent(getApplicationContext(),mic_page.getClass());
+//                    bundle.putParcelableArrayList("config_device",);
+                    bundle.putSerializable("config_device",config_devices);
+                    intent.putExtra("User_Info",bundle);
+                    Log.d(TAG,"마이크 페이지로 ㄱ나당");
+                    startActivityForResult(intent, RequestCode.MICPAGE);
+
+
+            }
+        }
+    };
 
     void doFragmentPage(String deviceID){
         //프레그 먼트 페이지를 쓰도록한
@@ -260,6 +284,7 @@ public class Config_MyHome extends AppCompatActivity {
 
         request_fragment = "선풍기 아님";
         doFragmentPage("no");
+        findViewById(R.id.button_mic_page).setOnClickListener(handler);
 
 
         listView = findViewById(R.id.listView_config_home);

@@ -49,4 +49,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+
+    <!--음성인식 페이지-->
+    <string name="mic_page_title">음성 검색</string>
+    <string name="str_start">Start</string>
+    <string name="str_stop">Stop</string>
 </resources>

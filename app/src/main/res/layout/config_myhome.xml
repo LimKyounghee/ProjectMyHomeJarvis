@@ -1,34 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/fragment_picture_or_button"
-        android:layout_width="match_parent"
-        android:layout_height="267dp"
+
+    <Button
+        android:id="@+id/button_mic_page"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginTop="216dp"
+        android:background="@drawable/mic_image_button_cilcked"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fragment_picture_or_button"
+            android:layout_width="match_parent"
+            android:layout_height="267dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:background="@drawable/strok_up_down">
+        </FrameLayout>
 
-    </android.support.constraint.ConstraintLayout>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@drawable/strok_up_down">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listView_config_home"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        </android.support.constraint.ConstraintLayout>
 
-</LinearLayout>
+        <ListView
+            android:id="@+id/listView_config_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

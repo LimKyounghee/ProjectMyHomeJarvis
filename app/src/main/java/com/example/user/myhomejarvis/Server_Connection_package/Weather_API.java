@@ -15,8 +15,8 @@ import java.net.URL;
 public class Weather_API{
 
 
-//     String appKey ="42f22f29-4475-48eb-b86d-6bd7732dd363";
-     String appKey ="6e8c1f7b-f368-46ea-821d-fd1263a5cf21";
+     String appKey ="42f22f29-4475-48eb-b86d-6bd7732dd363";
+//     String appKey ="6e8c1f7b-f368-46ea-821d-fd1263a5cf21";
     final static public  String TAG = "Weather_API";
 
     public  String getWegher_API_Result(double latitude, double longitude){

@@ -41,7 +41,9 @@ public class Admit_Activity extends AppCompatActivity{
                     if(PermissionUtil.checkPermissions(Admit_Activity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                             && (PermissionUtil.checkPermissions(Admit_Activity.this, Manifest.permission.READ_EXTERNAL_STORAGE))
                             && (PermissionUtil.checkPermissions(Admit_Activity.this, Manifest.permission.ACCESS_FINE_LOCATION))
-                            && (PermissionUtil.checkPermissions(Admit_Activity.this, Manifest.permission.ACCESS_COARSE_LOCATION))) {
+                            && (PermissionUtil.checkPermissions(Admit_Activity.this, Manifest.permission.ACCESS_COARSE_LOCATION))
+                            && (PermissionUtil.checkPermissions(Admit_Activity.this, Manifest.permission.RECORD_AUDIO))) {
+
                         // 권한이 있으므로 원하는 메소드를 사용
                         LogManager.print("바로 로그인 화면으로 이동");
                         Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
