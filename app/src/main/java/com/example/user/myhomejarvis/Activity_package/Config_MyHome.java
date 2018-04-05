@@ -3,7 +3,11 @@ package com.example.user.myhomejarvis.Activity_package;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+<<<<<<< HEAD
 import android.content.SharedPreferences;
+=======
+import android.content.Intent;
+>>>>>>> f06e8f72d0fe402c5166c21dc377537057421a27
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +35,7 @@ import com.example.user.myhomejarvis.ListView_Util.Config_myhome_LinearLayout;
 import com.example.user.myhomejarvis.ListView_Util.Single_Grid_item_VO;
 import com.example.user.myhomejarvis.LogManager;
 import com.example.user.myhomejarvis.R;
+import com.example.user.myhomejarvis.RequestCode;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
 import com.example.user.myhomejarvis.Server_Connection_package.Server_URL;
 import com.example.user.myhomejarvis.Server_Connection_package.Util;
@@ -69,34 +75,120 @@ public class Config_MyHome extends AppCompatActivity {
     String[] device_list = {"Fan","Cooler","Humi","Sound","Shock","Plug","Light","Cam","Bell","DoorLock"};
 
     ArrayList<Config_device> config_devices = new ArrayList<Config_device>();
+//    ArrayList<String> user_devices_to_mic_page =  new ArrayList<String>();
     ListView listView_Device;
     int this_position;
+
+    boolean isFan_fragment = false;
+    boolean ispicture_fragment = false;
+
+    View.OnClickListener handler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+
+                case R.id.button_mic_page:
+
+                    MIC_page mic_page = new MIC_page();
+                    Intent intent = new Intent(getApplicationContext(),mic_page.getClass());
+//                    bundle.putParcelableArrayList("config_device",);
+                    bundle.putSerializable("config_device",config_devices);
+                    intent.putExtra("User_Info",bundle);
+                    Log.d(TAG,"마이크 페이지로 ㄱ나당");
+                    startActivityForResult(intent, RequestCode.MICPAGE);
+
+
+            }
+        }
+    };
 
     void doFragmentPage(String deviceID){
         //프레그 먼트 페이지를 쓰도록한
 
-        Fragment fragment;
+        Fragment fragment = null;
         Bundle bundle = new Bundle();
         bundle.putString("deviceID",deviceID);
         bundle.putString("userID",userID);
 
-
-        if(("fan").equals(request_fragment)){
-
-            fragment = fragment_fan_button;
-        }else{
-
-            fragment = fragment_picture;
-        }
-
-        fragment.setArguments(bundle);
+        String fragmentTag = null;
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_picture_or_button,fragment);
-        fragmentTransaction.commit();
+
+
+
+        if(isFan_fragment == false && ispicture_fragment ==false){
+            //둘다 false일때 누른 값으로 실행한다.
+            if(("fan").equals(request_fragment)){
+
+                fragment = fragment_fan_button;
+                fragmentTag = "fan";
+                Log.d(TAG,"fragmentTeag ===" +fragmentTag);
+                isFan_fragment = true;
+                ispicture_fragment = false;
+
+            }else{
+                fragment = fragment_picture;
+                fragmentTag = "picture";
+                Log.d(TAG,"fragmentTeag ===" +fragmentTag);
+                isFan_fragment = false;
+                ispicture_fragment = true;
+
+            }
+
+        }else if (isFan_fragment == true && ispicture_fragment ==false){
+            //팬 페이지 실행중 팬이 눌리면 암것도 안함
+            // 다른거 눌리면 페이지 바꾸게 한다.
+
+            if(("fan").equals(request_fragment)){
+
+
+                Log.d(TAG,"누름1111111111111111111122222222222222");
+            }else{
+                fragment = fragment_picture;
+                fragmentTag = "picture";
+                Log.d(TAG,"fragmentTeag ===" +fragmentTag);
+                isFan_fragment = false;
+                ispicture_fragment = true;
+
+            }
+        }else if(isFan_fragment == false && ispicture_fragment ==true){
+
+            //
+
+            if(("fan").equals(request_fragment)){
+
+                fragment = fragment_fan_button;
+                fragmentTag = "fan";
+                Log.d(TAG,"fragmentTeag ===" +fragmentTag);
+                isFan_fragment = true;
+                ispicture_fragment = false;
+            }else{
+
+                Log.d(TAG,"누름11111111111111111111");
+
+            }
+        }
+
+
+        Log.d(TAG,"fragmentTag" +fragmentTag);
+
+        if(fragment.isRemoving()){
+            fragment.getArguments().putAll(bundle);
+        }else{
+
+            if(getSupportFragmentManager().findFragmentByTag(fragmentTag) != null) {
+                fragmentManager.beginTransaction().remove(getFragmentManager().findFragmentByTag(fragmentTag)).commit();
+            }
+//            fragmentManager.beginTransaction().remove(fragment).commit();
+            fragment.setArguments(bundle);
+        }
+
+
+        fragmentTransaction.replace(R.id.fragment_picture_or_button,fragment,fragmentTag).addToBackStack(null).commit();
 
     }
+
 
 
     void doShow_config_page(){
@@ -154,6 +246,19 @@ public class Config_MyHome extends AppCompatActivity {
 
                     config_devices=  gsonResponse_config_device.getData();
                     //여기서 VOS정의함
+
+                    for(int i = config_devices.size()-1; i>=0; i--){
+
+                        int idx = config_devices.get(i).getDeviceID().indexOf("Bell");
+                        int idx2 = config_devices.get(i).getDeviceID().indexOf("DoorLock");
+
+                        if(idx != -1 || idx2 != -1){
+                            config_devices.remove(i);
+                        }
+
+                    }
+                    Log.d(TAG,"디바이스 정보 " +config_devices.toString());
+
                     listView_Device = findViewById(R.id.listView_config_home);
 
                     adaper = new SingerAdaper();
@@ -184,6 +289,8 @@ public class Config_MyHome extends AppCompatActivity {
 
         request_fragment = "선풍기 아님";
         doFragmentPage("no");
+        findViewById(R.id.button_mic_page).setOnClickListener(handler);
+
 
         listView = findViewById(R.id.listView_config_home);
 //
@@ -192,8 +299,6 @@ public class Config_MyHome extends AppCompatActivity {
 
         listView.setAdapter(adaper);
         adaper.notifyDataSetChanged();
-
-
         doShow_config_page();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -226,7 +331,13 @@ public class Config_MyHome extends AppCompatActivity {
                 if(funtion_Num == 1) {
                     //여기서 온 오프 할 수 있게 하기
 //
-//                    request_fragment = "선풍기 아님";
+                    request_fragment = "선풍기 아님";
+
+                    if(isFan_fragment == false && ispicture_fragment ==true){
+
+                    }else{
+                        doFragmentPage(device_Name);
+                    }
 //                    doFragmentPage(device);
 
                     int indx = -1;
@@ -332,7 +443,13 @@ public class Config_MyHome extends AppCompatActivity {
                         case "Fan" :
 
                             request_fragment = "fan";
-                            doFragmentPage(device_Name);
+
+                            if(isFan_fragment == true && ispicture_fragment ==false){
+
+                            }else{
+                                doFragmentPage(device_Name);
+                            }
+//                            doFragmentPage(device_Name);
                             //일단 다른페이지 로가서 할 것은 선풍기 밖에 엄ㅅㅂ음
                             break;
                     }

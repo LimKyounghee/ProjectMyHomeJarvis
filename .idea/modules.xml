@@ -3,14 +3,25 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://C:\Users\user\Desktop\KPC\Android\MyHomeJarvis\GIT.iml" filepath="C:\Users\user\Desktop\KPC\Android\MyHomeJarvis\GIT.iml" />
+<<<<<<< HEAD
       <module fileurl="file://C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.3.28)\MyHomeJarvis.iml" filepath="C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.3.28)\MyHomeJarvis.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/MyHomeJarvis.iml" filepath="$PROJECT_DIR$/MyHomeJarvis.iml" />
+>>>>>>> f06e8f72d0fe402c5166c21dc377537057421a27
       <module fileurl="file://C:\Users\Kyun\Desktop\GIT\MyHomeJarvis.iml" filepath="C:\Users\Kyun\Desktop\GIT\MyHomeJarvis.iml" />
       <module fileurl="file://C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.4.1)\MyHomeJarvis.iml" filepath="C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.4.1)\MyHomeJarvis.iml" />
+      <module fileurl="file://C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.3.28)\MyHomeJarvis.iml" filepath="C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.3.28)\MyHomeJarvis.iml" />
       <module fileurl="file://C:\Users\user\Desktop\KPC\Android\MyHomeJarvis\Myhome_Jarvis(2018.3.28).iml" filepath="C:\Users\user\Desktop\KPC\Android\MyHomeJarvis\Myhome_Jarvis(2018.3.28).iml" />
+<<<<<<< HEAD
       <module fileurl="file://C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.4.2)\Myhome_Jarvis(2018.4.1).iml" filepath="C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.4.2)\Myhome_Jarvis(2018.4.1).iml" />
       <module fileurl="file://$PROJECT_DIR$/Myhome_Jarvis(2018.4.2).iml" filepath="$PROJECT_DIR$/Myhome_Jarvis(2018.4.2).iml" />
       <module fileurl="file://$PROJECT_DIR$/../Myhome_Jarvis(2018.4.1)/app/app.iml" filepath="$PROJECT_DIR$/../Myhome_Jarvis(2018.4.1)/app/app.iml" />
       <module fileurl="file://C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.4.2)\app\app.iml" filepath="C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.4.2)\app\app.iml" />
+=======
+      <module fileurl="file://C:\Users\user\Desktop\KPC\Android\MyHomeJarvis\Myhome_Jarvis(2018.4.1).iml" filepath="C:\Users\user\Desktop\KPC\Android\MyHomeJarvis\Myhome_Jarvis(2018.4.1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.4.1)\app\app.iml" filepath="C:\Users\Kyun\Desktop\Myhome_Jarvis(2018.4.1)\app\app.iml" />
+>>>>>>> f06e8f72d0fe402c5166c21dc377537057421a27
       <module fileurl="file://C:\Users\Kyun\Desktop\GIT\app\app.iml" filepath="C:\Users\Kyun\Desktop\GIT\app\app.iml" />
     </modules>
   </component>

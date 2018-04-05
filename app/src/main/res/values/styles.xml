@@ -18,6 +18,12 @@
         <item name="android:includeFontPadding">false</item>
 
     </style>
+    
+    <style name="Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+
+
+    </style>
 
 
 </resources>
