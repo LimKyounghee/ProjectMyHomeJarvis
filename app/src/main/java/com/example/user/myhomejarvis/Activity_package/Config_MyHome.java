@@ -641,37 +641,42 @@ public class Config_MyHome extends AppCompatActivity {
 
             SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
-//            if(item.getDeviceID().equals("LG Fan1")) {
+            if(item.getDeviceID().equals("LG Fan1")) {
                 LogManager.print("선풍기 shared에 저장 완료");
                 editor.putString("fan_device_id", item.getDeviceID());
                 editor.putString("fan_status", item.getDeviceStatus());
-//                editor.commit();
-//            }else if (item.getDeviceID().equals("SAMSUNG Light1")) {
+                editor.commit();
+            }
+            if (item.getDeviceID().equals("SAMSUNG Light1")) {
                 LogManager.print("전등1 shared에 저장 완료");
                 editor.putString("led1_device_id", item.getDeviceID());
                 editor.putString("led1_status", item.getDeviceStatus());
-//                editor.commit();
-//            }else if (item.getDeviceID().equals("SAMSUNG Light2")) {
+                editor.commit();
+            }
+            if (item.getDeviceID().equals("SAMSUNG Light2")) {
                 LogManager.print("전등2 shared에 저장 완료");
                 editor.putString("led2_device_id", item.getDeviceID());
                 editor.putString("led2_status", item.getDeviceStatus());
-//                editor.commit();
-//            }else if (item.getDeviceID().equals("LG Light1")) {
+                editor.commit();
+            }
+            if (item.getDeviceID().equals("LG Light1")) {
                 LogManager.print("전등3 shared에 저장 완료");
                 editor.putString("led3_device_id", item.getDeviceID());
                 editor.putString("led3_status", item.getDeviceStatus());
-//                editor.commit();
-//            }else if (item.getDeviceID().equals("GE Light1")) {
+                editor.commit();
+            }
+            if (item.getDeviceID().equals("GE Light1")) {
                 LogManager.print("전등4 shared에 저장 완료");
                 editor.putString("led4_device_id", item.getDeviceID());
                 editor.putString("led4_status", item.getDeviceStatus());
-//                editor.commit();
-//            }else if (item.getDeviceID().equals("SKT Plug1")) {
+                editor.commit();
+            }
+            if (item.getDeviceID().equals("SKT Plug1")) {
                 LogManager.print("플러그 shared에 저장 완료");
                 editor.putString("plug_device_id", item.getDeviceID());
                 editor.putString("plug_status", item.getDeviceStatus());
                 editor.commit();
-//            }
+            }
 
             int imageID =  R.drawable.mainlogo;
             int[] device_image_value = {
