@@ -85,6 +85,11 @@ public class Join_Activity extends AppCompatActivity {
                     Log.d(TAG,"회원가입 버튼 누름");
                     doJoin();
                     break;
+
+                case R.id.button_config_id:
+                    Log.d(TAG,"아이디 중복 확인 누름");
+                    doConfig_id();
+                    break;
             }
         }
     };
@@ -123,11 +128,46 @@ public class Join_Activity extends AppCompatActivity {
 
     }
 
+
+    void doConfig_id(){
+
+        ServerConnection serverConnection;
+        String type = "userID";
+        String config_ID;
+
+        join_id = findViewById(R.id.join_id);
+        String url11 = Server_URL.getIdConfig_URL();
+
+       if(join_id.getText().toString() != null){
+
+           config_ID = join_id.getText().toString();
+
+           Gson gson = new Gson();
+           String config_id_json = gson.toJson(config_ID);
+           Log.d(TAG,config_id_json);
+
+           try {
+
+               serverConnection = new ServerConnection(config_id_json,url11,type,threadHandler);
+               serverConnection.start();
+               Log.d(TAG, "서버랑 연결");
+//
+//                thread = new ConnctionThread(join_info_json,url);
+//                thread.start();
+           }catch (Exception e){
+               e.printStackTrace();
+           }
+
+
+       }
+
+
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////doJoin()
     void doJoin(){
 
-//        ConnctionThread thread;
 
         ServerConnection serverConnection;
         String type = "join_info";
@@ -203,47 +243,7 @@ public class Join_Activity extends AppCompatActivity {
 
 
     }
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////ConnctionThread()
-//    class ConnctionThread extends  Thread{
-//
-//        String data;
-//        String url;
-//
-//        public ConnctionThread(String data, String url) {
-//            this.data = data;
-//            this.url = url;
-//        }
-//        public void run(){
-//
-//            String result = sendToServer();
-//            Log.d(TAG,"sendToServer Resalt"+result);
-//
-//            Message message = new Message();
-//            Bundle b = message.getData();
-//            b.putString("data",result);
-//            threadHandler.sendMessage(message);
-//
-//
-//        }
-//
-//        String sendToServer(){
-//            Map<String, String> params = new HashMap<String, String>();
-//            params.put("join_info",data);
-//            Util util = new Util();
-//            String result ="";
-//
-//            try {
-//
-//                result = util.sendPost(url, params);
-//
-//            }catch(Exception e){
-//                e.getStackTrace();
-//            }
-//
-//            return result;
-//        }
-//    }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////ThreadHandler()
 
@@ -273,16 +273,51 @@ public class Join_Activity extends AppCompatActivity {
                         String getEvent = gsonResponse.getEvent();
                         String getStatus = gsonResponse.getStatus();
 
-                        if(getEvent.equals("Sign In")){
+                        switch (getEvent){
 
-                            if(getStatus.equals("ok")){
+                            case "Sign In":
 
-                                showMessage("Join_In_Ok");
-                            }else{
-                                showMessage("Join_In_false");
-                            }
+                                switch (getStatus){
+                                    case "ok":
+                                        showMessage("Join_In_Ok");
+                                        break;
+
+                                    case "false":
+                                        showMessage("Join_In_false");
+                                        break;
+                                }
+                                break;
+
+
+                            case "idChecker":
+
+                                switch (getStatus){
+
+                                    case "ok":
+                                        showMessage("id_ok");
+                                        break;
+
+                                    case "fail" :
+                                        showMessage("id_false");
+                                        join_id.getText().clear();
+                                        break;
+
+                                }
+
+                                break;
 
                         }
+
+//                        if(getEvent.equals("Sign In")){
+//
+//                            if(getStatus.equals("ok")){
+//
+//                                showMessage("Join_In_Ok");
+//                            }else{
+//                                showMessage("Join_In_false");
+//                            }
+//
+//                        }
                     }
 
                 }
@@ -366,6 +401,34 @@ public class Join_Activity extends AppCompatActivity {
                 });
                 break;
 
+            case "id_ok":
+//                content = "비밀번호 먼저 설정 하십시오";
+                builder.setMessage("사용할 수 있는 아이디 입니다.");
+//        builder.setIcon(); 아이콘은 좀 나중에 해보쟞
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        Log.d(TAG, "확인버튼 누름");
+                    }
+                });
+
+                break;
+
+            case "id_false":
+//                content = "비밀번호 먼저 설정 하십시오";
+                builder.setMessage("사용할 수 없는 아이디 입니다. 다시 설정해 주십시오");
+//        builder.setIcon(); 아이콘은 좀 나중에 해보쟞
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        Log.d(TAG, "확인버튼 누름");
+                    }
+                });
+
+                break;
+
 
 
 
@@ -390,6 +453,7 @@ public class Join_Activity extends AppCompatActivity {
         //비밀번호 확인 클릭시 테두리 색 비밀번호에 맞춰서 알려주기
         findViewById(R.id.join_repw).setOnTouchListener(touch_handler);
 //        findViewById(R.id.join_repw).setOnKeyListener(keyListener);
+        findViewById(R.id.button_config_id).setOnClickListener(handler);
 
 
         findViewById(R.id.join_btn).setOnClickListener(handler);

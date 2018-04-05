@@ -1,5 +1,7 @@
 package com.example.user.myhomejarvis.Activity_package;
 
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -160,6 +162,13 @@ public class Find_Family_List extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.family_list);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("currentPage","Find_Family_List");
+        editor.commit();
 
         bundle = getIntent().getBundleExtra("User_Info");
         vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");

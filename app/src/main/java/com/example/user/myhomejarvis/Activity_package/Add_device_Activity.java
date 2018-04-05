@@ -2,6 +2,7 @@ package com.example.user.myhomejarvis.Activity_package;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +29,7 @@ import com.example.user.myhomejarvis.Gson_package.GsonResponse_add_device;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.ListView_Util.Add_device_LinearLayout;
 import com.example.user.myhomejarvis.ListView_Util.Single_Grid_item_VO;
+import com.example.user.myhomejarvis.Page_String;
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.RequestCode;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
@@ -73,6 +75,11 @@ public class Add_device_Activity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.add_device);
 
+
+        SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("currentPage", Page_String.ADD_DEVICE);
+        editor.commit();
 
         Bundle bundle = getIntent().getBundleExtra("Grid_info");
         userID = getIntent().getIntExtra("userID",0);

@@ -23,6 +23,21 @@ public class Server_URL {
     private static final String fan_onoff_url = "http://192.168.0.8:8080/JavisProject/fan.in";
     private static final String family_list = "http://192.168.0.8:8080/JavisProject/familylist.in";
     private static final String DoorRequest_URL = "http://192.168.0.8:8080/JavisProject/doorrquest.in";
+    private static final String idConfig_URL = "http://192.168.0.8:8080/JavisProject/idchecker.in";
+    private static final String find_id_URL = "http://192.168.0.8:8080/JavisProject/findid.in";
+    private static final String find_pw_URL = "http://192.168.0.8:8080/JavisProject/findpw.in";
+
+    public static String getFind_pw_URL() {
+        return find_pw_URL;
+    }
+
+    public static String getFind_id_URL() {
+        return find_id_URL;
+    }
+
+    public static String getIdConfig_URL() {
+        return idConfig_URL;
+    }
 
     public static String getFamily_list() {
         return family_list;

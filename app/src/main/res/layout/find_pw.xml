@@ -19,44 +19,47 @@
         app:srcCompat="@drawable/mainlogo" />
 
     <EditText
-        android:id="@+id/editText_login_ID"
+        android:id="@+id/editText_find_PW_userID"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/editbackimg"
+        android:ems="10"
+        android:hint="아이디"
+        android:inputType="phone"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/myhomeFontColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <EditText
+        android:id="@+id/editText_find_PW_phone"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/editbackimg"
         android:ems="10"
-        android:hint="아이디"
+        android:hint="010XXXXXXXX"
         android:inputType="textPersonName"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:textColor="@color/myhomeFontColor"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <EditText
-        android:id="@+id/editText_login_PW"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/editbackimg"
-        android:ems="10"
-        android:hint="비밀번호"
-        android:inputType="textPassword"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_login_ID" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_find_PW_userID" />
 
     <Button
-        android:id="@+id/button_find_ID"
+        android:id="@+id/button_find_PW"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -64,53 +67,24 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/login_clicked"
-        android:text="@string/myhome_login"
+        android:text="@string/myhome_login_PW_Config"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_login_PW" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_find_PW_phone" />
 
-    <Button
-        android:id="@+id/button_pw_config"
-        style="?android:attr/borderlessButtonStyle"
+    <TextView
+        android:id="@+id/textView12"
         android:layout_width="wrap_content"
-        android:layout_height="27dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/text_button"
-        android:text="@string/myhome_login_PW_Config"
-        android:textColor="@color/myhomeFontColor"
+        android:text="@string/find_PW_phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_find_ID" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <Button
-        android:id="@+id/button_id_config"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="72dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/text_button"
-        android:text="@string/myhome_login_ID_Config"
-        android:textColor="@color/myhomeFontColor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_find_ID" />
-
-    <Button
-        android:id="@+id/button_login_to_join"
-
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="63dp"
-        android:layout_height="27dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/text_button"
-        android:text="@string/myhome_login_Join"
-        android:textColor="@color/myhomeFontColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_find_ID" />
 </android.support.constraint.ConstraintLayout>

@@ -36,6 +36,7 @@ import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
 import com.example.user.myhomejarvis.Gson_package.GsonResponse_add_device;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.ListView_Util.Single_Grid_item_VO;
+import com.example.user.myhomejarvis.Page_String;
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.RequestCode;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
@@ -83,6 +84,11 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
 
     String user_ID_to_Drawer;
     String user_Name_to_Drawer;
+
+
+
+
+
 
 
 
@@ -431,6 +437,8 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
     }
 
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -438,6 +446,10 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.project_main);
 
         startLocationService();
+
+        //백스페이스 막기
+
+
 
         bundle = getIntent().getBundleExtra("User_Info");
         vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
@@ -488,6 +500,9 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
             SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
             editor.putString("userID", vo.getUserID());
+            editor.putString("userPW",vo.getPw());
+            editor.putInt("familyID",vo.getFamilyID());
+            editor.putString("currentPage",Page_String.PROJECT_MIAIN);
             editor.commit();
 
             userID = vo.getFamilyID();
@@ -522,7 +537,7 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         }else{
-            super.onBackPressed();
+//            super.onBackPressed();
         }
 
     }
@@ -554,8 +569,16 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.navigation_item_logout:
-               Login_Activity login_activity = new Login_Activity();
-               doChangePage(login_activity,RequestCode.LOGINPAGE);
+                Login_Activity login_activity = new Login_Activity();
+                //로그아웃 할때 쉐.프 데이터 없애준당
+                SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("userID", null);
+                editor.putString("userPW",null);
+                editor.putInt("familyID",0);
+                editor.putString("currentPage", Page_String.LOGIN_PAGE);
+                editor.commit();
+                doChangePage(login_activity,RequestCode.LOGINPAGE);
                 break;
 
         }

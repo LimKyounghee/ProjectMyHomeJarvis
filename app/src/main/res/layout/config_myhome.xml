@@ -11,8 +11,7 @@
         android:id="@+id/button_mic_page"
         android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/mic_image_button_cilcked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,6 +29,7 @@
             android:id="@+id/fragment_picture_or_button"
             android:layout_width="match_parent"
             android:layout_height="267dp"
+            android:background="@drawable/homepicture"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

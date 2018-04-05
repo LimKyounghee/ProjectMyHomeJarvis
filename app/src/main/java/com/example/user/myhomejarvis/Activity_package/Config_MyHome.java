@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,6 +31,7 @@ import com.example.user.myhomejarvis.Gson_package.GsonResponse_Join;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.ListView_Util.Config_myhome_LinearLayout;
 import com.example.user.myhomejarvis.ListView_Util.Single_Grid_item_VO;
+import com.example.user.myhomejarvis.Page_String;
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.RequestCode;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
@@ -274,6 +277,13 @@ public class Config_MyHome extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.config_myhome);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("currentPage", Page_String.CONFIG_MYHOME);
+        editor.commit();
 
         bundle = getIntent().getBundleExtra("User_Info");
         vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");

@@ -22,6 +22,7 @@ import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
 import com.example.user.myhomejarvis.Gson_package.GsonResponse_add_family;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.LogManager;
+import com.example.user.myhomejarvis.Page_String;
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.Server_Connection_package.Server_URL;
 import com.example.user.myhomejarvis.Server_Connection_package.Util;
@@ -202,6 +203,11 @@ public class Create_Family_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.create_family);
+
+        SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("currentPage", Page_String.CREAT_FAMILY);
+        editor.commit();
 
         bundle = getIntent().getBundleExtra("User_Info");
         vo = (UserInfoVO)bundle.getSerializable("UserInfoVO") ;

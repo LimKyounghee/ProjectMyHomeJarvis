@@ -2,6 +2,7 @@ package com.example.user.myhomejarvis.Activity_package;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import com.example.user.myhomejarvis.Data_Info_package.Add_devcie;
+import com.example.user.myhomejarvis.Data_Info_package.Config_device;
+import com.example.user.myhomejarvis.Page_String;
 import com.example.user.myhomejarvis.Permission_package.PermissionUtil;
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.LogManager;
@@ -99,6 +103,7 @@ public class Loading_Activity extends AppCompatActivity {
                     && (PermissionUtil.checkPermissions(Loading_Activity.this, Manifest.permission.ACCESS_COARSE_LOCATION))
                     && (PermissionUtil.checkPermissions(Loading_Activity.this, Manifest.permission.RECORD_AUDIO))) {
                 // 권한이 있으므로 원하는 메소드를 사용
+
                 LogManager.print("바로 로그인 화면으로 이동");
                 Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
                 startActivity(intent);

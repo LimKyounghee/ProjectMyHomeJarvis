@@ -1,9 +1,12 @@
 package com.example.user.myhomejarvis.Activity_package;
 
+import android.content.pm.ActivityInfo;
+import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +30,7 @@ import com.naver.speech.clientapi.SpeechRecognitionResult;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by user on 2018-04-04.
@@ -54,6 +58,8 @@ public class MIC_page extends AppCompatActivity{
     private String mResult;
 
     private AudioWriterPCM writer;
+
+    private TextToSpeech tts;
 
     // Handle speech recognition Messages.
     private void handleMessage(Message msg) {
@@ -88,7 +94,7 @@ public class MIC_page extends AppCompatActivity{
                     strBuf.append("\n");
                 }
                 mResult = strBuf.toString();
-                txtResult.setText(mResult);
+//                txtResult.setText(mResult);
 
                 //받은 텍스트를 가지고 컨트롤 하기
                 do_config_speaking(mResult);
@@ -124,6 +130,7 @@ public class MIC_page extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mic_controller);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         bundle = getIntent().getBundleExtra("User_Info");
         config_devices = (ArrayList<Config_device>) bundle.getSerializable("config_device");
@@ -133,6 +140,17 @@ public class MIC_page extends AppCompatActivity{
 
 
         Log.d(TAG,"왔음");
+
+        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR){
+
+                    tts.setLanguage(Locale.KOREAN);
+
+                }
+            }
+        });
 
         txtResult = (TextView) findViewById(R.id.textView_mic_result);
         btnStart = (Button) findViewById(R.id.button_start_mic);
@@ -239,10 +257,10 @@ public class MIC_page extends AppCompatActivity{
 
             if(control_request.indexOf("꺼줘") != -1){
 
-                do_Control_device(deviceID,"켜짐",type,url);
+                do_Control_device(deviceID,"꺼짐",type,url);
 
             }else if(control_request.indexOf("켜줘") != -1){
-                do_Control_device(deviceID,"꺼짐",type,url);
+                do_Control_device(deviceID,"켜짐",type,url);
             }
 
         }else if(control_request.indexOf("거실") != -1){
@@ -252,10 +270,10 @@ public class MIC_page extends AppCompatActivity{
             url = Server_URL.getLed_onoff_URL();
             if(control_request.indexOf("꺼줘") != -1){
 
-                do_Control_device(deviceID,"켜짐",type,url);
+                do_Control_device(deviceID,"꺼짐",type,url);
 
             }else if(control_request.indexOf("켜줘") != -1){
-                do_Control_device(deviceID,"꺼짐",type,url);
+                do_Control_device(deviceID,"켜짐",type,url);
             }
 
         }else if(control_request.indexOf("화장실") != -1){
@@ -269,10 +287,10 @@ public class MIC_page extends AppCompatActivity{
                 url = Server_URL.getLed_onoff_URL();
                 if(control_request.indexOf("꺼줘") != -1){
 
-                    do_Control_device(deviceID,"켜짐",type,url);
+                    do_Control_device(deviceID,"꺼짐",type,url);
 
                 }else if(control_request.indexOf("켜줘") != -1){
-                    do_Control_device(deviceID,"꺼짐",type,url);
+                    do_Control_device(deviceID,"켜짐",type,url);
                 }
             }
 
@@ -287,10 +305,10 @@ public class MIC_page extends AppCompatActivity{
                 url = Server_URL.getLed_onoff_URL();
                 if(control_request.indexOf("꺼줘") != -1){
 
-                    do_Control_device(deviceID,"켜짐",type,url);
+                    do_Control_device(deviceID,"꺼짐",type,url);
 
                 }else if(control_request.indexOf("켜줘") != -1){
-                    do_Control_device(deviceID,"꺼짐",type,url);
+                    do_Control_device(deviceID,"켜짐",type,url);
                 }
             }
 
@@ -301,10 +319,10 @@ public class MIC_page extends AppCompatActivity{
             url = Server_URL.getSmartplug_URL();
             if(control_request.indexOf("꺼줘") != -1){
 
-                do_Control_device(deviceID,"켜짐",type,url);
+                do_Control_device(deviceID,"꺼짐",type,url);
 
             }else if(control_request.indexOf("켜줘") != -1){
-                do_Control_device(deviceID,"꺼짐",type,url);
+                do_Control_device(deviceID,"켜짐",type,url);
             }
 
         }else if(control_request.indexOf("선풍기") != -1){
@@ -327,6 +345,9 @@ public class MIC_page extends AppCompatActivity{
 
                 do_Control_device(deviceID,"꺼짐",type,url);
             }
+        }else{
+
+            txtResult.setText("다시 시도해 주세용");
         }
 
 
@@ -442,6 +463,7 @@ public class MIC_page extends AppCompatActivity{
 
                                 break;
                         }
+                        tts.speak(txtResult.getText().toString(),TextToSpeech.QUEUE_FLUSH, null);
 
                     }
 

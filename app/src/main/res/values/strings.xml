@@ -55,4 +55,9 @@
     <string name="mic_page_title">음성 검색</string>
     <string name="str_start">Start</string>
     <string name="str_stop">Stop</string>
+
+
+    <string name="id_overlap">중복 검사</string>
+    <string name="find_ID_phone">가입한 핸드폰 번호를 입력해 주십시오</string>
+    <string name="find_PW_phone">가입한 아이디와 핸드폰 번호를 입력해 주십시오</string>
 </resources>

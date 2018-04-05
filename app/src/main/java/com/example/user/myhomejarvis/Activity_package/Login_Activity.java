@@ -2,6 +2,7 @@ package com.example.user.myhomejarvis.Activity_package;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,7 +53,7 @@ public class Login_Activity extends AppCompatActivity {
 
             switch(v.getId()){
 
-                case R.id.button_login:
+                case R.id.button_find_ID:
                     doLogin();
                     break;
 
@@ -79,7 +80,7 @@ public class Login_Activity extends AppCompatActivity {
         switch (type){
 
             case "id_config":
-                intent = new Intent(getApplicationContext(),Login_Activity.class);
+                intent = new Intent(getApplicationContext(),Find_ID_page.class);
 //                startActivityForResult(intent,REQUEST_CODE_MENUE);
                 startActivity(intent);
                 finish();
@@ -87,7 +88,7 @@ public class Login_Activity extends AppCompatActivity {
                 //여기는 아이디 찾기 페이지로 간다
 
             case "pw_config":
-                intent = new Intent(getApplicationContext(),Login_Activity.class);
+                intent = new Intent(getApplicationContext(),Find_PW_page.class);
 //                startActivityForResult(intent,REQUEST_CODE_MENUE);
                 startActivity(intent);
                 finish();
@@ -99,12 +100,9 @@ public class Login_Activity extends AppCompatActivity {
 //                startActivityForResult(intent,REQUEST_CODE_MENUE);
                 startActivity(intent);
                 finish();
-                //여기는 비번 찾기 페이지로 간당
+                //여기는 회원가입 페이지로 간당
                 break;
         }
-
-
-
 
 
 
@@ -122,7 +120,6 @@ public class Login_Activity extends AppCompatActivity {
         ThreadHandler threadHandler = new ThreadHandler();
 
         String type = "login_info";
-
 
         login_ID = findViewById(R.id.editText_login_ID);
         login_PW = findViewById(R.id.editText_login_PW);
@@ -158,49 +155,37 @@ public class Login_Activity extends AppCompatActivity {
 
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////ConnctionThread()
+    void doLogin(String userID, String userPW){
 
-//    class ConnectionThread extends Thread{
-//
-//        String data;
-//        String url;
-//
-//        public ConnectionThread(String data, String url){
-//
-//            this.data = data;
-//            this.url = url;
-//        }
-//        public void run(){
-//
-//            String result = sendToServer();
-//            Log.d(TAG,"sendToServer Resalt"+result);
-//
-//            Message message = new Message();
-//            Bundle b = message.getData();
-//            b.putString("data",result);
-//            threadHandler.sendMessage(message);
-//
-//        }
-//
-//        String sendToServer(){
-//            Map<String, String> params = new HashMap<String, String>();
-//            params.put("login_info",data);
-//            Util util = new Util();
-//            String result = "";
-//
-//            try{
-//
-//                result = util.sendPost(url,params);
-//            }catch (Exception e){
-//                e.getStackTrace();
-//            }
-//
-//            return  result;
-//
-//        }
-//
-//    }
+
+        ServerConnection serverConnection;
+        ThreadHandler threadHandler = new ThreadHandler();
+
+        String type = "login_info";
+
+
+        login_info.setId(userID);
+        login_info.setPw(userPW);
+
+
+        Log.d(TAG,login_info.toString());
+
+        Gson gson = new Gson();
+        String login_info_json = gson.toJson(login_info);
+        Log.d(TAG,login_info_json);
+
+        try{
+
+            serverConnection = new ServerConnection(login_info_json,url,type,threadHandler);
+            serverConnection.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////ThreadHandler()
 
@@ -312,15 +297,45 @@ public class Login_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.myhome_login);
 
-        findViewById(R.id.button_login_to_join).setOnClickListener(handler);
-        findViewById(R.id.button_id_config).setOnClickListener(handler);
-        findViewById(R.id.button_pw_config).setOnClickListener(handler);
+        SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        String userID = pref.getString("userID","NO");
+        String userPW = pref.getString("userPW","NO");
 
-        findViewById(R.id.button_login).setOnClickListener(handler);
-        Log.d(TAG, "id : " + FirebaseInstanceId.getInstance().getToken());
+        if(userID.equals("NO") || userPW.equals("NO")){
+
+            setContentView(R.layout.myhome_login);
+
+            findViewById(R.id.button_login_to_join).setOnClickListener(handler);
+            findViewById(R.id.button_id_config).setOnClickListener(handler);
+            findViewById(R.id.button_pw_config).setOnClickListener(handler);
+
+            findViewById(R.id.button_find_ID).setOnClickListener(handler);
+            Log.d(TAG, "id : " + FirebaseInstanceId.getInstance().getToken());
+        }else{
+
+            doLogin(userID,userPW);
+            //바로 로그인 한당
+        }
+
+
+
+
+
+
+
+
+
+
+//        findViewById(R.id.button_login_to_join).setOnClickListener(handler);
+//        findViewById(R.id.button_id_config).setOnClickListener(handler);
+//        findViewById(R.id.button_pw_config).setOnClickListener(handler);
+//
+//        findViewById(R.id.button_login).setOnClickListener(handler);
+//        Log.d(TAG, "id : " + FirebaseInstanceId.getInstance().getToken());
 
     }
 }

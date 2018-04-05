@@ -41,6 +41,8 @@
         <activity android:name=".Activity_package.Regist_Family_Request_Activity"/>
         <activity android:name=".Activity_package.Find_Family_List"/>
         <activity android:name=".Activity_package.Streaming_Activity"/>
+        <activity android:name=".Activity_package.Find_ID_page"/>
+        <activity android:name=".Activity_package.Find_PW_page"/>
         <activity android:name=".Activity_package.MIC_page"
             android:theme="@style/Dialog"/>
 

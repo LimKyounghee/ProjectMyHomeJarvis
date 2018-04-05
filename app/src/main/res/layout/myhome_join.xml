@@ -235,13 +235,29 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="52dp"
-                android:background="@color/myhomeLightGray"
+                android:background="@drawable/login_clicked"
                 android:text="회원가입"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/join_address" />
+
+            <Button
+                android:id="@+id/button_config_id"
+                android:layout_width="71dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/id_overlap"
+                android:textColor="@color/ic_launcher_background"
+                android:textColorLink="@android:color/transparent"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/join_pw"
+                app:layout_constraintEnd_toEndOf="@+id/join_id"
+                app:layout_constraintTop_toTopOf="@+id/join_id" />
 
         </android.support.constraint.ConstraintLayout>
 
