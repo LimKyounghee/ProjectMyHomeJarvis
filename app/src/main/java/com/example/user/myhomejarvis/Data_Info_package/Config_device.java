@@ -1,11 +1,13 @@
 package com.example.user.myhomejarvis.Data_Info_package;
 
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
+
 /**
  * Created by user on 2018-03-29.
  */
 
 public class Config_device {
-
 
     private String deviceID;
     private String deviceStatus;
@@ -17,6 +19,7 @@ public class Config_device {
         this.deviceStatus = deviceStatus;
         this.function = function;
         this.device_Image = device_Image;
+
     }
     public String getDeviceID() {
         return deviceID;

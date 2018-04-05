@@ -36,11 +36,17 @@ import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
 import com.example.user.myhomejarvis.Gson_package.GsonResponse_add_device;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.ListView_Util.Single_Grid_item_VO;
+import com.example.user.myhomejarvis.LogManager;
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.RequestCode;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
 import com.example.user.myhomejarvis.Server_Connection_package.Server_URL;
 import com.example.user.myhomejarvis.Server_Connection_package.Weather_API;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -57,6 +63,7 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
     private final static String TAG = "Project_Main";
     Bundle bundle;
     UserInfoVO vo;
+    private AdView mAdView;
 
     int userID;//이름은 유저아이딩 인데 패밀리 아이디 저장함... ㅐ밀리 아이디 써야 할지도 몰라서 ㅠ
 
@@ -440,57 +447,95 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
         startLocationService();
 
         bundle = getIntent().getBundleExtra("User_Info");
-        vo =(UserInfoVO) bundle.getSerializable("UserInfoVO");
-
-
-        userID = vo.getFamilyID();
-        user_ID_to_Drawer = vo.getUserID();
-        user_Name_to_Drawer = vo.getName();
-
-        //메뉴 설정 해주기
-
-        toolbar =findViewById(R.id.toolbar);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
-
-        View headerView = navigationView.getHeaderView(0);
-        drawer_userID = (TextView) headerView.findViewById(R.id.textView_drawer_userID);
-        drawer_userName = headerView.findViewById(R.id.textView_drawer_userName);
-
-        drawer_userID.setText(user_ID_to_Drawer);
-        drawer_userName.setText(user_Name_to_Drawer);
-
-        //툴바 생성 및 세팅
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        //액션 토글
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        LinearLayout linearLayout = findViewById(R.id.main_button_LinearLayout);
-        findViewById(R.id.button_config_Myhome).setOnClickListener(handler);
-        findViewById(R.id.add_device).setOnClickListener(handler);
-        Button register_home = findViewById(R.id.button_register_Home);
-        register_home.setOnClickListener(handler);
-
-
-<<<<<<< HEAD
-=======
-        bundle = getIntent().getBundleExtra("User_Info");
         if (bundle != null) {
             vo = (UserInfoVO) bundle.getSerializable("UserInfoVO");
+
+            userID = vo.getFamilyID();
+            user_ID_to_Drawer = vo.getUserID();
+            user_Name_to_Drawer = vo.getName();
+
+            //메뉴 설정 해주기
+
+            toolbar =findViewById(R.id.toolbar);
+            drawerLayout = findViewById(R.id.drawer_layout);
+            navigationView = findViewById(R.id.navigation_view);
+
+            View headerView = navigationView.getHeaderView(0);
+            drawer_userID = (TextView) headerView.findViewById(R.id.textView_drawer_userID);
+            drawer_userName = headerView.findViewById(R.id.textView_drawer_userName);
+
+            drawer_userID.setText(user_ID_to_Drawer);
+            drawer_userName.setText(user_Name_to_Drawer);
+
+            //툴바 생성 및 세팅
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+            //액션 토글
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+            drawerLayout.addDrawerListener(toggle);
+            toggle.syncState();
+
+            navigationView.setNavigationItemSelectedListener(this);
+
+
+            LinearLayout linearLayout = findViewById(R.id.main_button_LinearLayout);
+            findViewById(R.id.button_config_Myhome).setOnClickListener(handler);
+            findViewById(R.id.add_device).setOnClickListener(handler);
+            Button register_home = findViewById(R.id.button_register_Home);
+            register_home.setOnClickListener(handler);
+
+            //광고 배너
+            MobileAds.initialize(this, "ca-app-pub-9604831383254278~9396568282");
+
+            AdView adView = new AdView(this);
+            adView.setAdSize(AdSize.BANNER);
+            adView.setAdUnitId("ca-app-pub-9604831383254278/8529853958");
+
+            mAdView = findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+
+            mAdView.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    // Code to be executed when an ad finishes loading.
+                    LogManager.print("onAdLoaded : 광고 배너 테스트1");
+                }
+
+                @Override
+                public void onAdFailedToLoad(int errorCode) {
+                    // Code to be executed when an ad request fails.
+                    LogManager.print("onFailedToLoaded : 광고 배너 실패 테스트");
+                }
+
+                @Override
+                public void onAdOpened() {
+                    // Code to be executed when an ad opens an overlay that
+                    // covers the screen.
+                    LogManager.print("onAdOpened : 광고 배너 Opened");
+                }
+
+                @Override
+                public void onAdLeftApplication() {
+                    // Code to be executed when the user has left the app.
+                    LogManager.print("onAdLeftApplication : 광고 배너 테스트");
+                }
+
+                @Override
+                public void onAdClosed() {
+                    // Code to be executed when when the user is about to return
+                    // to the app after tapping on an ad.
+                    LogManager.print("onAdClosed : 광고 배너 Closed");
+                }
+            });
 
             //SaredPreference에  값 저장하기
             SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
             editor.putString("userID", vo.getUserID());
             editor.commit();
->>>>>>> 58712e18e1881314ff0fd659dcd28c2671e493a9
+
 
             userID = vo.getFamilyID();
 
@@ -499,11 +544,11 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
             //FamilyID확인하고 값이 0000이 아니면 집 추가 버튼 보이지 않게 하고  0000이면 집 추가 버튼 보이게 한다.
 
 
-<<<<<<< HEAD
+
             register_home.setVisibility(View.INVISIBLE);
             linearLayout.removeView(register_home);
-        }else{
-=======
+
+
             if (vo.getFamilyID() != 0) {
 
                 register_home.setVisibility(View.INVISIBLE);
@@ -515,9 +560,11 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
             startActivity(intent);
             finish();
->>>>>>> 58712e18e1881314ff0fd659dcd28c2671e493a9
+
         }
     }
+
+
 
 
     @Override
@@ -567,6 +614,33 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onPause() {
+        // This method should be called in the parent Activity's onPause() method.
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // This method should be called in the parent Activity's onResume() method.
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        // This method should be called in the parent Activity's onDestroy() method.
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
     }
 
 }

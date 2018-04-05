@@ -1,6 +1,7 @@
 package com.example.user.myhomejarvis.Fragment_package;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.example.user.myhomejarvis.Data_Info_package.On_Off_Control_Data;
 import com.example.user.myhomejarvis.Gson_package.GsonResponse_Join;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
+import com.example.user.myhomejarvis.LogManager;
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
 import com.example.user.myhomejarvis.Server_Connection_package.Server_URL;
@@ -31,6 +33,7 @@ public class Config_myhome_fragmenr_fan_button extends Fragment{
     String url;
     String deviceID;//받아오기
     String type;//받아오기 = 여긴ㄴ 그냥 지정
+    private SharedPreferences pref;
 
 
     public Config_myhome_fragmenr_fan_button() {
@@ -125,7 +128,13 @@ public class Config_myhome_fragmenr_fan_button extends Fragment{
                         Log.d(TAG,"from json 값"+gsonResponse_join);
 
                         // 이게 끝나고 어떻게 할 ㅅ것인가...
-
+//                        pref = context.getSharedPreferences("jarvis", 0);
+//                        SharedPreferences.Editor editor = pref.edit();
+//                        if(deviceID.equals("LG Fan1")) {
+//                            LogManager.print("선풍기 shared에 저장 완료");
+//                            editor.putString("fan_device_id", deviceID);
+//                            editor.putString("fan_status", getStatus);
+//                            editor.commit();
 
                     }
 

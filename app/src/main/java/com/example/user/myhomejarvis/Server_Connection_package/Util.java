@@ -1,6 +1,9 @@
 package com.example.user.myhomejarvis.Server_Connection_package;
 
 import android.util.Log;
+import android.widget.Toast;
+
+import com.example.user.myhomejarvis.LogManager;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -26,7 +29,9 @@ public class Util {
 
         URL url;
         try {
+            LogManager.print("Util sendPost 이상 없음 / url : " + sendurl);
             url = new URL(sendurl);
+            LogManager.print("Util sendPost 이상 없음22");
         } catch (MalformedURLException e) {
             throw new IllegalAccessException("invalid url");
         }
@@ -88,6 +93,7 @@ public class Util {
                 //뭔가 받는 메소드 만들기
 
             } else {
+
                 throw new IOException("Post failed with error code" + status);
             }
             Log.v(TAG, response.toString());

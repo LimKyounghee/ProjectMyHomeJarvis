@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.myhomejarvis">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"></uses-permission>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 
     <application
         android:allowBackup="true"
@@ -17,29 +20,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Testous">
         <activity android:name=".Activity_package.Loading_Activity">
+            <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Activity_package.Project_Main"/>
-        <activity android:name=".Activity_package.Join_Activity"/>
-        <activity android:name=".Activity_package.Light_On_Off"/>
-        <activity android:name=".Activity_package.Smart_Plug"/>
-        <activity android:name=".Activity_package.Admit_Activity"/>
-        <activity android:name=".Activity_package.Add_device_Activity"/>
-        <activity android:name=".Activity_package.Login_Activity"/>
-        <activity android:name=".Activity_package.Add_Home_Activity"/>
-        <activity android:name=".Activity_package.Config_MyHome"/>
-        <activity android:name=".Activity_package.Find_Family_Activity"/>
-        <activity android:name=".Activity_package.Create_Family_Activity"/>
-        <activity android:name=".Activity_package.Regist_Family_Request_Activity"/>
-        <activity android:name=".Activity_package.Find_Family_List"/>
-        <activity android:name=".Activity_package.Streaming_Activity"/>
-
-
+        <activity android:name=".Activity_package.Project_Main" />
+        <activity android:name=".Activity_package.Join_Activity" />
+        <activity android:name=".Activity_package.Light_On_Off" />
+        <activity android:name=".Activity_package.Smart_Plug" />
+        <activity android:name=".Activity_package.Admit_Activity" />
+        <activity android:name=".Activity_package.Add_device_Activity" />
+        <activity android:name=".Activity_package.Login_Activity" />
+        <activity android:name=".Activity_package.Add_Home_Activity" />
+        <activity android:name=".Activity_package.Config_MyHome" />
+        <activity android:name=".Activity_package.Find_Family_Activity" />
+        <activity android:name=".Activity_package.Create_Family_Activity" />
+        <activity android:name=".Activity_package.Regist_Family_Request_Activity" />
+        <activity android:name=".Activity_package.Find_Family_List" />
+        <activity android:name=".Activity_package.Streaming_Activity" />
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
 
         <service
             android:name=".FCM_package.MyFirebaseMessagingService"
@@ -49,7 +57,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".FCM_package.MyFirebaseInstanceIDService"
             android:enabled="true"
@@ -59,8 +66,51 @@
             </intent-filter>
         </service>
 
+        <receiver android:name=".AppWidget_package.JarvisWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/jarvis_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".AppWidget_package.Widget_Receiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="led1"/>
+                <action android:name="led2"/>
+                <action android:name="led3"/>
+                <action android:name="led4"/>
+                <action android:name="plug"/>
+                <action android:name="fan"/>
+                <action android:name="update_status"/>
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".AppWidget_package.Widget_UI_Change_Receiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="plugOn"/>
+                <action android:name="plugOff"/>
+                <action android:name="led1On"/>
+                <action android:name="led1Off"/>
+                <action android:name="led2On"/>
+                <action android:name="led2Off"/>
+                <action android:name="led3On"/>
+                <action android:name="led3Off"/>
+                <action android:name="led4On"/>
+                <action android:name="led4Off"/>
+                <action android:name="fanStrong"/>
+                <action android:name="fanMiddle"/>
+                <action android:name="fanWeak"/>
+                <action android:name="fanOff"/>
 
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
