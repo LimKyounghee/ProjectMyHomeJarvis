@@ -1,0 +1,360 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/widget_margin">
+
+
+    <RelativeLayout
+        android:id="@+id/widget_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+
+        android:background="@color/widget_title_color">
+
+        <ImageView
+            android:id="@+id/imageView12"
+
+            android:layout_width="8dp"
+            android:layout_height="23dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/widget_title_image" />
+
+        <TextView
+            android:id="@+id/appwidget_title"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/button4"
+            android:gravity="center"
+            android:text="우리집 JARVIS"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/widget_setting_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imageView16"
+            android:background="@drawable/settings" />
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="8dp"
+            android:layout_height="23dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/settings" />
+
+        <Button
+            android:id="@+id/widget_return_btn"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignTop="@+id/imageView16"
+            android:layout_toLeftOf="@+id/widget_setting_btn"
+            android:layout_toStartOf="@+id/widget_setting_btn"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/widget_return_image" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/imageView12"
+            android:layout_toRightOf="@+id/imageView12"
+            android:background="@drawable/widget_title_image"
+            app:srcCompat="@drawable/widget_title_image" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:background="@color/widget_main_color"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="22dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/widget_room1_led"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/lighton" />
+
+            <Button
+                android:id="@+id/widget_led1_btn"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/textView2"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button2"
+                android:text="켜짐"
+                android:textColor="@android:color/background_light" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/widget_room1_led"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="전 등 1"
+                android:textColor="@android:color/background_dark"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/widget_room2_led"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/lighton" />
+
+            <Button
+                android:id="@+id/widget_led2_btn"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/widget_room2_led"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button2"
+                android:text="켜짐"
+                android:textColor="@color/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/widget_room2_led"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="전 등 2"
+                android:textColor="@android:color/background_dark"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/widget_livingroom_led"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/lighton" />
+
+            <Button
+                android:id="@+id/widget_led3_btn"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/widget_livingroom_led"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button2"
+                android:text="켜짐"
+                android:textColor="@color/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/widget_livingroom_led"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="전 등 3"
+                android:textColor="@android:color/background_dark"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/widget_restroom_led"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/lighton" />
+
+            <Button
+                android:id="@+id/widget_led4_btn"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/widget_restroom_led"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button2"
+                android:text="켜짐"
+                android:textColor="@color/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/widget_restroom_led"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="전 등 4"
+                android:textColor="@android:color/background_dark"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:background="@color/widget_main_color"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="22dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/widget_fan"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/cooler" />
+
+            <Button
+                android:id="@+id/widget_fan_btn"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/widget_fan"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button2"
+                android:text="강"
+                android:textColor="@color/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/widget_fan"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="선 풍 기"
+                android:textColor="@android:color/background_dark"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/widget_plut"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/plug" />
+
+            <Button
+                android:id="@+id/widget_plug_btn"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/widget_plut"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button2"
+                android:text="켜짐"
+                android:textColor="@color/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/widget_plut"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="스마트 플러그"
+                android:textColor="@android:color/background_dark"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/add_device_btn"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/plus_image" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

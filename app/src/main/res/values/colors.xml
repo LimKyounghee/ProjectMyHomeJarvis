@@ -8,4 +8,8 @@
     <color name="myhomeLightGray">#bebdbd</color>
     <color name="text_back">#e1e1e1</color>
     <color name="menu_color">#5debeb</color>
+    <color name="widget_title_color">#a231ebeb</color>
+    <color name="widget_main_color">#92f9f9f9</color>
+    <color name="widget_btn_clicked_color">#40a0a0</color>
+    <color name="widget_btn_off_unclicked">#696868</color>
 </resources>

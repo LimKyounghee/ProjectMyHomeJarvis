@@ -1,16 +1,17 @@
 package com.example.user.myhomejarvis.Data_Info_package;
 
+
+
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.io.Serializable;
+
 
 /**
  * Created by user on 2018-03-29.
  */
 
 public class Config_device implements Serializable{
-
 
     private String deviceID;
     private String deviceStatus;
@@ -33,6 +34,7 @@ public class Config_device implements Serializable{
         this.deviceStatus = deviceStatus;
         this.function = function;
         this.device_Image = device_Image;
+
     }
 
 

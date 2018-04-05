@@ -37,6 +37,7 @@ public class Streaming_Activity extends AppCompatActivity {
                 case R.id.watch_cctv_btn:
                     ThreadHandlerCCTVOn threadHandler = new ThreadHandlerCCTVOn();
                     msg = "cctv_on";
+                    Toast.makeText(getApplicationContext(), "스트리밍서버에 접속중입니다... 잠시만 기다려주세요.", Toast.LENGTH_LONG).show();
                     doSendToServer(msg, threadHandler);
                     break;
                 case R.id.open_door_btn:
@@ -101,7 +102,7 @@ public class Streaming_Activity extends AppCompatActivity {
                         if(getEvent.equals("Streaming On")){
 
                             if(getStatus.equals("ok")){
-                                Toast.makeText(getApplicationContext(), "스트리밍서버에 접속중입니다... 잠시만 기다려주세요.", Toast.LENGTH_LONG).show();
+
                                 try {
                                     Thread.sleep(5000);
                                 }catch (InterruptedException e) {

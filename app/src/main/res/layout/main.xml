@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -67,27 +68,28 @@
 
 
     <LinearLayout
+        android:id="@+id/main_button_LinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/main_button_LinearLayout">
+        android:background="@android:color/background_light"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/button_config_Myhome"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:layout_above="@+id/button_register_Home"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp"
             android:background="@drawable/button"
             android:text="우리집 확인하기"
-            android:layout_marginTop="30dp"
             tools:layout_editor_absoluteY="38dp" />
 
         <Button
             android:id="@+id/button_register_Home"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/button_config_Myhome"
@@ -98,13 +100,31 @@
         <Button
             android:id="@+id/add_device"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/button_register_Home"
             android:layout_marginTop="10dp"
             android:background="@drawable/button"
             android:text="기기추가 하기" />
+
+        <RelativeLayout
+            android:id="@+id/relativeAdsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp">
+            <!--android:visibility="gone"-->
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-9604831383254278/8529853958"></com.google.android.gms.ads.AdView>
+
+        </RelativeLayout>
 
 
     </LinearLayout>

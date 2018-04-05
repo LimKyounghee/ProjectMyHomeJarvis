@@ -77,15 +77,15 @@ public class Admit_Activity extends AppCompatActivity{
         builder.setPositiveButton("설정", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                try {
-                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).setData(
-                            Uri.parse("package: " + getPackageName()));
-                    startActivity(intent);
-                }catch (ActivityNotFoundException e) {
-                    e.printStackTrace();
-                    Intent intent = new Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS);
-                    startActivity(intent);
-                }
+//                try {
+//                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).setData(
+//                            Uri.parse("package: " + getPackageName()));
+//                    startActivity(intent);
+//                }catch (ActivityNotFoundException e) {
+//                    e.printStackTrace();
+//                    Intent intent = new Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS);
+//                    startActivity(intent);
+//                }
             }
         });
         builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
