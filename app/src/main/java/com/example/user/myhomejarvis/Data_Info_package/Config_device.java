@@ -1,14 +1,11 @@
 package com.example.user.myhomejarvis.Data_Info_package;
 
-<<<<<<< HEAD
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
-=======
+
+
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.io.Serializable;
->>>>>>> f06e8f72d0fe402c5166c21dc377537057421a27
+
 
 /**
  * Created by user on 2018-03-29.

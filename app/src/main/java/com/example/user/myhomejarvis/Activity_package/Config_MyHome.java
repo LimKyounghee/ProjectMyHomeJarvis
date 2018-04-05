@@ -3,11 +3,11 @@ package com.example.user.myhomejarvis.Activity_package;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-<<<<<<< HEAD
+
 import android.content.SharedPreferences;
-=======
+
 import android.content.Intent;
->>>>>>> f06e8f72d0fe402c5166c21dc377537057421a27
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;

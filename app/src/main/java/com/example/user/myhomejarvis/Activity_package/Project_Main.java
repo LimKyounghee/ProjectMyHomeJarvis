@@ -449,10 +449,16 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
         bundle = getIntent().getBundleExtra("User_Info");
         if (bundle != null) {
             vo = (UserInfoVO) bundle.getSerializable("UserInfoVO");
-
+            Log.d(TAG, vo.toString());
             userID = vo.getFamilyID();
             user_ID_to_Drawer = vo.getUserID();
             user_Name_to_Drawer = vo.getName();
+
+            //SaredPreference에  값 저장하기
+            SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("userID", vo.getUserID());
+            editor.commit();
 
             //메뉴 설정 해주기
 
@@ -492,7 +498,7 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
             adView.setAdSize(AdSize.BANNER);
             adView.setAdUnitId("ca-app-pub-9604831383254278/8529853958");
 
-<<<<<<< HEAD
+
             mAdView = findViewById(R.id.adView);
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
@@ -530,41 +536,9 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
                     LogManager.print("onAdClosed : 광고 배너 Closed");
                 }
             });
-=======
-
-        bundle = getIntent().getBundleExtra("User_Info");
-        if (bundle != null) {
-            vo = (UserInfoVO) bundle.getSerializable("UserInfoVO");
->>>>>>> f06e8f72d0fe402c5166c21dc377537057421a27
-
-            //SaredPreference에  값 저장하기
-            SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putString("userID", vo.getUserID());
-            editor.commit();
-<<<<<<< HEAD
-
-=======
->>>>>>> f06e8f72d0fe402c5166c21dc377537057421a27
-
-            userID = vo.getFamilyID();
-
-            Log.d(TAG, vo.toString());
 
             //FamilyID확인하고 값이 0000이 아니면 집 추가 버튼 보이지 않게 하고  0000이면 집 추가 버튼 보이게 한다.
 
-
-<<<<<<< HEAD
-
-            register_home.setVisibility(View.INVISIBLE);
-            linearLayout.removeView(register_home);
-
-
-=======
-            register_home.setVisibility(View.INVISIBLE);
-            linearLayout.removeView(register_home);
-
->>>>>>> f06e8f72d0fe402c5166c21dc377537057421a27
             if (vo.getFamilyID() != 0) {
 
                 register_home.setVisibility(View.INVISIBLE);
@@ -579,9 +553,6 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
 
         }
     }
-
-
-
 
     @Override
     public void onBackPressed() {

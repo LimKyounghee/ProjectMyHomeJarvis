@@ -17,13 +17,9 @@ public class PermissionUtil {
     private static String[] PERMISSION_STORAGE = {                                  //필요한 퍼미션들
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_FINE_LOCATION,
-<<<<<<< HEAD
-            Manifest.permission.ACCESS_COARSE_LOCATION
-//            Manifest.permission.WRITE_SETTINGS
-=======
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.RECORD_AUDIO
->>>>>>> f06e8f72d0fe402c5166c21dc377537057421a27
+
     };
 
     public static boolean checkPermissions(Activity activity, String permission) {     // 퍼미션이 있으면 true, 없으면 false를 리턴하는 메소드

@@ -49,15 +49,15 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-<<<<<<< HEAD
+
     <string name="appwidget_title">우리집 JARVIS</string>
     <string name="add_widget">Add widget</string>
-=======
+
 
 
     <!--음성인식 페이지-->
     <string name="mic_page_title">음성 검색</string>
     <string name="str_start">Start</string>
     <string name="str_stop">Stop</string>
->>>>>>> f06e8f72d0fe402c5166c21dc377537057421a27
+
 </resources>
