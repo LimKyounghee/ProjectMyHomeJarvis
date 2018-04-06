@@ -26,6 +26,11 @@ public class Server_URL {
     private static final String idConfig_URL = "http://192.168.0.8:8080/JavisProject/idchecker.in";
     private static final String find_id_URL = "http://192.168.0.8:8080/JavisProject/findid.in";
     private static final String find_pw_URL = "http://192.168.0.8:8080/JavisProject/findpw.in";
+    private static final String find_webView_URL = "http://192.168.0.8:8080/JavisProject/passmainpage.in";
+
+    public static String getFind_webView_URL() {
+        return find_webView_URL;
+    }
 
     public static String getFind_pw_URL() {
         return find_pw_URL;

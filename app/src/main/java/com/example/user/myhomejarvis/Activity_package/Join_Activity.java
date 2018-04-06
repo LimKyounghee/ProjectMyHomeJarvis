@@ -440,6 +440,15 @@ public class Join_Activity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////onCreate()
 

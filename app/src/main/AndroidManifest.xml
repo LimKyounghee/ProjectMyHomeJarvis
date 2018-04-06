@@ -32,11 +32,8 @@
             </intent-filter>
         </activity>
 
-<<<<<<< HEAD
         <activity android:name=".Activity_package.Project_Main"/>
         <activity android:name=".Activity_package.Join_Activity"/>
-        <activity android:name=".Activity_package.Light_On_Off"/>
-        <activity android:name=".Activity_package.Smart_Plug"/>
         <activity android:name=".Activity_package.Admit_Activity"/>
         <activity android:name=".Activity_package.Add_device_Activity"/>
         <activity android:name=".Activity_package.Login_Activity"/>
@@ -49,26 +46,12 @@
         <activity android:name=".Activity_package.Streaming_Activity"/>
         <activity android:name=".Activity_package.Find_ID_page"/>
         <activity android:name=".Activity_package.Find_PW_page"/>
-=======
-        <activity android:name=".Activity_package.Project_Main" />
-        <activity android:name=".Activity_package.Join_Activity" />
-        <activity android:name=".Activity_package.Light_On_Off" />
-        <activity android:name=".Activity_package.Smart_Plug" />
-        <activity android:name=".Activity_package.Admit_Activity" />
-        <activity android:name=".Activity_package.Add_device_Activity" />
-        <activity android:name=".Activity_package.Login_Activity" />
-        <activity android:name=".Activity_package.Add_Home_Activity" />
-        <activity android:name=".Activity_package.Config_MyHome" />
-        <activity android:name=".Activity_package.Find_Family_Activity" />
-        <activity android:name=".Activity_package.Create_Family_Activity" />
-        <activity android:name=".Activity_package.Regist_Family_Request_Activity" />
-        <activity android:name=".Activity_package.Find_Family_List" />
-        <activity android:name=".Activity_package.Streaming_Activity" />
+        <activity android:name=".Activity_package.Webview_Activitiy"/>
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
->>>>>>> bb3764c8d50d974cbd3fa01213ab9deb7b5d1f66
+
         <activity android:name=".Activity_package.MIC_page"
             android:theme="@style/Dialog"/>
 

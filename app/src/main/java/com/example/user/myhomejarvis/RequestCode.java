@@ -13,6 +13,7 @@ public class RequestCode {
     public static final int FAMILY_LIST = 301;
     public static final int LOGINPAGE = 401;
     public static final int MICPAGE = 501;
+    public static final int WEBVIEW = 601;
 
 
 }

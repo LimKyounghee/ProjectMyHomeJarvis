@@ -463,6 +463,7 @@ public class MIC_page extends AppCompatActivity{
 
                                 break;
                         }
+                        Log.d(TAG,"000000000000"+txtResult.getText().toString());
                         tts.speak(txtResult.getText().toString(),TextToSpeech.QUEUE_FLUSH, null);
 
                     }

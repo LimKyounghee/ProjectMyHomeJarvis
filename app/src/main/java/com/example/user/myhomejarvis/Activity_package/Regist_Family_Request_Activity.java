@@ -194,6 +194,14 @@ public class Regist_Family_Request_Activity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
+        startActivity(intent);
+        finish();
+
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

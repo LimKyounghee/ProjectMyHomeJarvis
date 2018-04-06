@@ -7,16 +7,16 @@ import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 
 import android.content.Intent;
-<<<<<<< HEAD
+
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-=======
 
->>>>>>> bb3764c8d50d974cbd3fa01213ab9deb7b5d1f66
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -38,11 +38,11 @@ import com.example.user.myhomejarvis.Gson_package.GsonResponse_Join;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.ListView_Util.Config_myhome_LinearLayout;
 import com.example.user.myhomejarvis.ListView_Util.Single_Grid_item_VO;
-<<<<<<< HEAD
+
 import com.example.user.myhomejarvis.Page_String;
-=======
+
 import com.example.user.myhomejarvis.LogManager;
->>>>>>> bb3764c8d50d974cbd3fa01213ab9deb7b5d1f66
+
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.RequestCode;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
@@ -282,6 +282,14 @@ public class Config_MyHome extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getApplicationContext(), Project_Main.class);
+        startActivity(intent);
+        finish();
+
+    }
 
 
     @Override

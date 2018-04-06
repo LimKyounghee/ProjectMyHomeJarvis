@@ -36,11 +36,11 @@ import com.example.user.myhomejarvis.Data_Info_package.UserInfoVO;
 import com.example.user.myhomejarvis.Gson_package.GsonResponse_add_device;
 import com.example.user.myhomejarvis.Gson_package.Gsonresult;
 import com.example.user.myhomejarvis.ListView_Util.Single_Grid_item_VO;
-<<<<<<< HEAD
+
 import com.example.user.myhomejarvis.Page_String;
-=======
+
 import com.example.user.myhomejarvis.LogManager;
->>>>>>> bb3764c8d50d974cbd3fa01213ab9deb7b5d1f66
+
 import com.example.user.myhomejarvis.R;
 import com.example.user.myhomejarvis.RequestCode;
 import com.example.user.myhomejarvis.Server_Connection_package.ServerConnection;
@@ -473,7 +473,11 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
             SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
             editor.putString("userID", vo.getUserID());
+            editor.putString("userPW",vo.getPw());
+            editor.putInt("familyID",vo.getFamilyID());
+            editor.putString("currentPage",Page_String.PROJECT_MIAIN);
             editor.commit();
+
 
             //메뉴 설정 해주기
 
@@ -518,23 +522,15 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
 
-<<<<<<< HEAD
-            //SaredPreference에  값 저장하기
-            SharedPreferences pref = getSharedPreferences("jarvis", MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putString("userID", vo.getUserID());
-            editor.putString("userPW",vo.getPw());
-            editor.putInt("familyID",vo.getFamilyID());
-            editor.putString("currentPage",Page_String.PROJECT_MIAIN);
-            editor.commit();
-=======
+
+
             mAdView.setAdListener(new AdListener() {
                 @Override
                 public void onAdLoaded() {
                     // Code to be executed when an ad finishes loading.
                     LogManager.print("onAdLoaded : 광고 배너 테스트1");
                 }
->>>>>>> bb3764c8d50d974cbd3fa01213ab9deb7b5d1f66
+
 
                 @Override
                 public void onAdFailedToLoad(int errorCode) {
@@ -586,7 +582,7 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         }else{
-//            super.onBackPressed();
+
         }
 
     }
@@ -608,8 +604,10 @@ public class Project_Main extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.navigation_item_chart:
-                Toast.makeText(getApplicationContext(), item.getTitle(),Toast.LENGTH_SHORT).show();
-                Log.d(TAG,"누름!2");
+
+                Webview_Activitiy webview_activitiy = new Webview_Activitiy();
+                doChangePage(webview_activitiy,RequestCode.WEBVIEW);
+
                 break;
 
             case R.id.navigation_item_support_center:

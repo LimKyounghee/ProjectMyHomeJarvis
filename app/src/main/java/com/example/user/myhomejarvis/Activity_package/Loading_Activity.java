@@ -57,6 +57,11 @@ public class Loading_Activity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
     class CountTask extends AsyncTask<Integer, Integer, String> {
 //         로직은 doInBackground 에서만 , UI는 Execute, ProgressUpdata에서만...
 

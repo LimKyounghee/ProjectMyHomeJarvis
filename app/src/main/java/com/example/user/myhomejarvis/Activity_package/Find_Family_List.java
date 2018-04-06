@@ -1,5 +1,6 @@
 package com.example.user.myhomejarvis.Activity_package;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -157,6 +158,16 @@ public class Find_Family_List extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getApplicationContext(), Project_Main.class);
+        startActivity(intent);
+        finish();
+
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

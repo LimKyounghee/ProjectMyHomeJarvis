@@ -68,6 +68,15 @@ public class Add_device_Activity extends AppCompatActivity {
     ArrayList<Single_Grid_item_VO> grid_brand= new ArrayList<Single_Grid_item_VO>();
     ArrayList<Single_Grid_item_VO> grid_device= new ArrayList<Single_Grid_item_VO>();
 
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getApplicationContext(), Project_Main.class);
+        startActivity(intent);
+        finish();
+
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -68,6 +68,16 @@ public class Add_Home_Activity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getApplicationContext(), Project_Main.class);
+        startActivity(intent);
+        finish();
+
+    }
+
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
